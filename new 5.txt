@@ -1,0 +1,1270 @@
+PYTHON NOTES:
+
+Steps to solve a problem:
+1. Make firm decision about what is the I/P, the O/P and the relavant information. Isolate the unwanted information.
+
+2. Find the solution mathematically or trial & error method or may be using a specific sub solution (Formula, Data structure or some particular Algorithm like searching or sorting etc.)
+
+3. Write the Algorithm (Step by step procedure to solve the problem. Note: Each step must be Simple, finite, atomic and unambigious)
+
+4. Write the Fake-Code/Pseudocode
+
+Note: As we go along, Step3 and 4 can be merged.
+
+5. Code it (in a particular syntax)
+
+6. Now go back to the problem statement and read the constraints and code it.
+--------------------------------------------------
+# Program to check if a number is a Perfect Square. The number is positive and descrete.
+
+I/P:
+One +ve integer
+
+Solution:
+40		6.45	6	36
+256		16.0	16	256
+
+We found the solution with indirect method (mathematically)
+Algorithm:
+Read/prompt/scan the input number N which is positive integer.
+Find quare root of N and store it in ROOT
+Truncate or remove the precision part from the ROOT (Now the ROOT is only a number)
+
+
+Read N
+root = findRootOfN(N)
+root = floor(root)
+if root * root == N then
+	declare N is a PS
+else
+	declare N is not a PS
+
+O/P:
+Statement saying the I/P number is PS or not a PS.
+-------------------------------
+p1.py
+
+# Program to check if a number is a Perfect Square
+'''
+Read N
+root = findRootOfN(N)
+root = floor(root)
+if root * root == N then
+	declare N is a PS
+else
+	declare N is not a PS
+'''
+inputNum = int(input('Enter a positve number to check if it is Perfect Square: '))
+
+rootNum = inputNum ** 0.5
+print(type(rootNum))
+rootNum = int(rootNum)
+print(type(rootNum))
+if rootNum * rootNum == inputNum:
+    print(f'{inputNum} is a Perfect Square')
+else:
+    print(inputNum, 'is not a Perfect Square')
+------------------------------------------------
+p2.py
+
+i = -1
+i -= -1 # i = i - (-1) = -1 + 1 = 0
+print(i)
+------------------------------------------------
+p3.py
+
+'''
+Given the average score of the student, print the result as follows:
+0  -  49    Fail
+50 -  74    SC
+75 -  90    FC
+91 - 100    Distinction  
+Also check for invalid input
+'''
+averageScore = int(input('Enter average score of the student to print the result: '))
+
+if averageScore < 0 or averageScore > 100:
+    print('Invalid average score entered')
+elif averageScore <= 49:
+    print("Result is Fail")
+elif averageScore <= 74:
+    print("Result is Second class")
+elif averageScore <= 90:
+    print("Result is Frist class")
+else:
+    print("Result is Distinction")
+-------------------------------------
+p4.py
+'''
+Program to count number of Odd digits in a number
+9562
+
+10) 9562 (956
+    9560
+       2
+
+Read N
+countOfOddDigits = 0
+until N is not 0 do:
+    divide N by 10 and get the remainder
+    check if remainder is Odd
+        countOfOddDigits += 1
+print countOfOddDigits
+'''
+inputNumber = int(input('Enter a number to count Odd digits in it: '))
+
+countOfOddDigits = 0
+tempNumber = inputNumber
+while tempNumber != 0:
+    remainderDigit = tempNumber % 10
+    tempNumber = tempNumber // 10
+    if remainderDigit % 2 == 1:
+        countOfOddDigits += 1
+print(f'Number of Odd digits in {inputNumber} is {countOfOddDigits}')
+---------------------------------------
+p5.py
+# Program to count number of Composite digits in a number
+
+# Program to count number of Composite digits in a number
+import math as m
+
+def isPrime1(number):
+    prime = True # Assume the number is Prime
+    if number == 1 or number == 0:
+        prime = False
+    elif number == 2:
+        pass
+    else:
+        rootNumber = m.ceil(number ** 0.5)
+        for i in range(2, rootNumber+1):
+            if number % i == 0:
+                prime = False
+                break # break the loop
+    return prime
+
+def isPrime2(number):
+    factorCount = 0
+    for i in range(1, number+1):
+        if number % i == 0:
+            factorCount += 1
+        if factorCount > 2:
+            return False
+    if factorCount == 2:
+        return True
+    return False
+
+def countCompositeDigits(number):
+    countOfComposites = 0
+    while number > 0:
+        if not isPrime1(number % 10):
+            countOfComposites += 1
+        number = number // 10
+    return countOfComposites
+
+#inputNumber = int(input('Enter a number to check if it is Prime: '))
+inputNumber = int(input('Enter a number to count the number of Composite digits: '))
+print(f'Number of Composite digits in {inputNumber} is {countCompositeDigits(inputNumber)}')
+---------------------------------------
+inputNumber = input('Enter a number to count the number of Composite digits: ')
+
+countCompositeDigits = 0
+for element in inputNumber:
+    if element in ['4', '6', '8', '9']:
+        countCompositeDigits += 1
+print(f'count of Composite Digits = {countCompositeDigits}')
+---------------------------------------
+p6.py
+
+'''
+Program to read a number from the user and find lucky digit of the user. Where the lucky digit is single digit number found after finding sum of the digits of the given number repeatedly until single digit number is found.
+
+Example:
+N = 789
+lucky digit is 6
+7 + 8 + 9 = 24 = 2 + 4 = 6
+
+Read N
+sumOfDigits = 0
+while N has digits:
+    digit = N % 10
+    sumOfDigits += digit
+    N = N / 10
+    if N == 0 and sumOfDigits >= 10:
+        N = sumOfDigits
+        sumOfDigits = 0
+'''
+inputNumber = int(input('Enter a number to find your lucky digit: '))
+
+# Big-Oh of n-square Algorithm (Bad)
+while inputNumber >= 10:
+    sumOfDigits = 0
+    while inputNumber != 0:
+        digit = inputNumber % 10
+        sumOfDigits += digit
+        inputNumber = inputNumber // 10
+    inputNumber = sumOfDigits
+
+print(f'Your lucky digit is {inputNumber}')
+----------------------------------------------------
+p7.py
+Program to Print the ELT of N lines of incrementing digits in each line (Every line must have the same digit).
+
+p8.py
+Draw a Rhombus of N lines (N must Odd)
+
+p9.py
+Draw X shape of N lines (made of stars *)
+
+p10.py
+Draw a hollow square of N lines
+
+p11.py
+Draw X shape inside a Hollow Square
+
+p12.py
+Draw Pascal's Triangle of N lines
+
+p13.py
+Find Nth term of the series: 1 2 2 3 3 5 5 7 8 11 13 13
+
+p14.py
+Count the number of each of the pairs of () {} and [] if the arrangement is correct. The only possible placement of {} is inside []. And [] or {} can be placed inside () only.
+
+p14a.py
+If properly arranged, Count the total number of pairs of {} and (). Each can be placed inside eachother.
+
+p14b.py
+If properly aranged, Count the number of {} in the given string of braces.
+
+Read n # number of lines in X shape
+for i in range(1, n+1):
+	for j in range(1, n+1):
+		if i == j || j == n-i+1:
+			print('*')
+		else
+			print(' ')
+-----------------------------------------------------
+delete from emp;
+// It deletes all the rows from the table (because, we haven't used any filtering). It doesn't delete the auto_increment data and the meta data.
+
+truncate table emp;
+// It deletes all the rows from the table and also it deletes the auto_increment data, but not the meta data.
+
+drop table emp;
+// It deletes everything
+
+create table persons(id int primary key, name varchar(50) not null, phone_num bigint);
+
+insert into persons('nithin', 9480273090);
+insert into persons('nikhil', 9480273091);
+insert into persons('nishanth', 9480273092);
+insert into persons('nikhila', 9480273093);
+insert into persons('namratha', 9480273094);
+insert into persons('noothan', 9480273095);
+
+alter table persons add constraint unique(phone_num);
+
+
+
+select id, place, phone_num from persons where name = null;
+// we are comparing the value of the field name in every row with the value in the variable null.
+
+select id, place, phone_num from persons where name is null;
+// we are checking if the value of the field name in every row is empty (null).
+
+select id, place, phone_num from persons where name = 'null';
+// we are comparing the value of the field name in every row with the string literal (constant value) 'null'.
+
+create table employees(id int primary key auto_increment, name varchar(50) not null, designation varchar(50), years_of_experience tinyint, commission float, salary float default 0, phone_number bigint unique, constraint new check (phone_number REGEXP '^[6789][0-9]{9}$'))) auto_increment = 1001;
+
+phone_number bigint unique, constraint new check (phone_number REGEXP '^[6789][0-9]{9}'));
+
+group by:
+Find highest salary of each designation
+Find lowest salary of each designation
+Find average salary of each designation
+Find count of employees in each designation
+
+Find highest salary of each designation other than the testers.
+select designation as Department, max(salary) as Max_Salary from employees group by designation having designation != 'tester';
+
+
+group by is to group the rows of a table on a specific field
+
+before grouping if we wish to filter the table data, use where clause.
+after grouping if you wish to filter the result set, then use having clause
+
+Correct order: where group by having
+
+Day2 Saturday 8th June
+RDBMS basics
+SQL (DDL, DML, TCL, DRL, DCL)
+DDL: create, alter, drop, truncate
+DML: update, insert, delete, merge
+DRL: select
+DCL: grant, revoke
+TCL: commit, rollback, savepoint
+ACID properties
+
+Day3 Monday 10th June
+Normalization:
+joins
+Stored Procedures
+functions
+Triggers
+Views
+Mini Project
+
+Day4 Tuesday 11th June
+Python DS and Searching and Sorting Algorithms
+linear Search, Binary Search, Bubble sort, Selection Sort, Insertion sort, Quick Sort, Merge Sort
+
+Day5 Wednesday 12th June
+Python - Mysql Program
+Hacker Rank Problem Solving
+
+Day6 Thursday 13th June
+Advanced DSA
+
+Day7 Friday 14th June
+Advanced DSA and OOP
+
+Day8 Saturday 15th June
+numpy pandas and matplotlib
+--------------------------------------------------------
+Project:
+gaming club:
+
+members:
+id, name, place, wallet_balance, phone_number
+
+games:
+id, name, duration, price, min_players, max_players, description
+
+recharges:
+id, member_id, amount, datetime
+
+transactions:
+id, member_id, game_id, number_of_players, amount
+
+collections:
+id, amount, date (unique), remarks
+
+-> membership amount is only 1000/- (non refundable)
+-> minimum recharge amount is 100 and maximum 2000 and in multiple of 100 only.
+-> maximum wallet balance can be 3000/-
+-> minimum wallet balance must be 300/- (on last day of the month, if wallet balance is below 300/- then a penalty amount of 100/- INR will be deducted.
+-> if the wallet balance becomes -ve then the membership is withdrawn.
+
+The member 1st takes the membership
+The member recharges his/her wallet
+The member then can play the games (transactions)
+The owner of the club maintains a table to store each day's collection
+
+OPERATIONS:
+owner checks the collections
+member plays a game
+add a new game 
+
+
+struct Employee {
+
+};
+ 
+Employee e1;
+Employee employees[10];
+
+Employee *ptr = (Employee*) malloc(sizeof(Employee) * 1);
+
+scan n
+Employee *arrayPtr = (Employee*) malloc(sizeof(Employee) * n);
+
+
+Employee e1; // we are creating the object in Stack area (inside the frame of the function)
+Employee employees[10]; // in stack area
+
+Employee *ptr = new Employee();
+
+scan n
+Employee *arrayPtr = new Employee[n]();
+
+def linearSearch(array, element):
+    for i in range(len(array)):
+        if array[i] == element:
+            return i
+    return -1 # unsuccessful search
+        
+inputSize = int(input('Enter size of the array: '))
+
+array = [] # array = list()
+print(f'Enter {inputSize} elements of the array')
+
+for i in range(inputSize):
+    element = input() # we are reading string
+    array.append(element)
+    #array.append(float(input()))
+
+searchElement = input('Enter the element to be searched: ')
+searchElementIndex = linearSearch(array, searchElement)
+
+print('User given elements are \n', array)
+if searchElementIndex == -1:
+    print(f'The element {searchElement} was not found in the Array')
+else:
+    print(f'The element {searchElement} was found at position {searchElementIndex+1} in the Array')
+	
+-----------------------------------------------
+Binary Search:
+
+N is size of the DS
+Assume all N elements of the DS are in order
+
+Step1: Reach the mid position
+step2: check if the mid element is the search element
+step3: if yes, stop the search and return the position
+if not, check if the search area is the 1st half or the second half and set it
+continue with Step1
+
+Assume the 1st index is low = 0
+Assume the last index is high = n-1 (n is the size of the DS)
+
+step1: mid = (low + high) // 2 (integer division)
+if array[mid] == searchElement then:
+	return mid
+else if searchElement < array[mid] then:
+	high = mid-1
+else:
+	low = mid+1
+-------------------------------------------
+def binarySearch(array, element):
+    low = 0
+    high = len(array) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if array[mid] == element:
+            return mid
+        elif element < array[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1 # unsuccessful search
+        
+inputSize = int(input('Enter size of the array: '))
+
+array = [] # array = list()
+print(f'Enter {inputSize} elements of the array')
+
+for i in range(inputSize):
+    element = input() # we are reading string
+    array.append(element)
+    #array.append(float(input()))
+
+searchElement = input('Enter the element to be searched: ')
+searchElementIndex = binarySearch(array, searchElement)
+
+print('User given elements are \n', array)
+if searchElementIndex == -1:
+    print(f'The element {searchElement} was not found in the Array')
+else:
+    print(f'The element {searchElement} was found at position {searchElementIndex+1} in the Array')
+---------------------------------------------------
+Insertion Sort:
+Decrease and Conquer Technique
+Since a one element Array is already sorted,
+We assume the 1st element in the given array is in sorted array and the rest of the elements are in unsorted array.
+So we just have to take one element at a time from the unsorted array and put it into the sorted array.
+However, we have to place it in its right position.
+For this, we have to make place for the new element in the sorted array and hence we may have to SHIFT the elements in the sorted array.
+
+
+23  44  12   9   3  31  23  17  29
+23  44
+3   9   12  17  23  23  29  31  44
+
+
+for i from 1 to n-1 do:
+	element = array[i]
+	j = i-1
+	while j >= 0 and element < array[j]  do:
+		array[j+1] = array[j]
+		j--
+	array[j+1] = element
+	
+3   9   12  17  23  23  29  31  44
+3   9   12  17  23  23  29  31  44
+
+WCE O(n2)
+BCE O(n)
+
+3  9  12  17  23  23  29  31  44
+9  3   
+12  9  3
+17  12  9  3
+23  17  12  9  3
+23  23  17  12  9  3
+
+def insertionSort(array):
+   j = 0
+   for i in range(1, len(array)) :
+        element = array[i]
+        j = i - 1
+        while j >= 0 and element < array[j]:
+            array[j+1] = array[j]
+            j -= 1
+        array[j+1] = element
+
+inputSize = int(input('Enter size of the array: '))
+
+array = [] # array = list()
+print(f'Enter {inputSize} elements of the array')
+
+for i in range(inputSize):
+    element = int(input()) # we are reading string
+    array.append(element)
+
+print('User given elements are \n', array)
+insertionSort(array)
+print('Sorted Array elements are \n', array)
+-----------------------------------
+array = list(input('Enter the list elements: '))
+# In the above, every character is spliut and stored as string elements of the list
+print(array)
+
+print(f'Enter elements of the Array ')
+array = list(map(int, input().split(',')))
+# One string is read and it is split on the space as delimiter and each string is converted into int data and stored in the list
+
+array = [int(element) for element in input().split()]
+# One string is read and it is split on the space as delimiter and each string is converted into int data and stored in the list
+-----------------------------------
+Bubble Sort
+
+23  44  12   9   3  31  23  17  29
+
+23  44  12   9   3  31  23  17  29
+23  12  44   9   3  31  23  17  29
+23  12   9  44   3  31  23  17  29
+23  12   9   3  44  31  23  17  29
+23  12   9   3  31  44  23  17  29
+23  12   9   3  31  23  44  17  29
+23  12   9   3  31  23  17  44  29
+23  12   9   3  31  23  17  29  44
+
+23  12   9   3  31  23  17  29  44
+
+(n-1) + (n-2) + (n-3) + .... + 2 + 1
+WCE is O(n sq)
+BCE is O(n sq)
+
+Since the efficiency is square, means we have nested loops
+
+Outer loop runs for the length of unsorted array
+inner loop compares consecutive elements in the unsorted array
+The core job done in the Bubble sort is swapping consecutive elements
+
+We know the number of elements to be sorted, which is n
+Hence the outer loop is for loop
+We know the number of elements in the unsorted array, which is n-i elements, where 'i' is the number of sorted elements.
+Hence the inner loop too would be for loop
+
+for i from 0 to n-2 do: (i is index, not position)
+	for j = 0 to n-i-2 do:
+		if array[j] > array[j+1] then:
+			swap array[j] with array[j+1]
+
+2  3  5  7  11  13  17  19  23
+
+for i from 0 to n-2 do: (Access all elements in unsorted array in each run)
+	sorted = True # assuming that the array is already sorted
+	for j = 0 to n-i-2 do:
+		if array[j] > array[j+1] then:
+			swap array[j] with array[j+1]
+			sorted = False
+	if sorted then:
+		break #break the outer loop
+----------------------------------------
+MENU TEMPLATE PROGRAM
+
+def createStudent():
+    print('Creating a new Student')
+
+def listStudents():
+    print('Listing all Students')
+
+def sortStudents():
+    print('Sorting all Student records')
+
+def exitProgram():
+    exit('End of the program')
+
+def invalidInput():
+    print('Invalid input entered')
+
+menu = {
+    1 : createStudent,
+    2 : listStudents,
+    3 : sortStudents,
+    4 : exitProgram
+}
+
+while True:
+    print('\n 1:Create-student 2:List-all 3:Sort-Records 4:Exit \n Your choice: ')
+    choice = int(input())
+    menu.get(choice, invalidInput)()
+
+------------------------------------------------------------
+CREATING OBJECTS USING A CLASS
+
+# Bubble sort
+
+class Student:
+    idGenerator = 101 # static variable
+    def __init__(self, name = '', marks = 0):
+        self.id = Student.idGenerator
+        self.name = name
+        self.marks = marks
+        Student.idGenerator += 1
+
+    def __str__(self):
+        studentStr =  'Id=' + str(self.id) + ', Name=' + self.name + ', Marks=' + str(self.marks)
+        return studentStr
+
+s1 = Student('nithin', 78)
+s2 = Student(marks = 98, name = 'mani')
+
+print('Student1 details are', s1) # s1.__str__()
+print('Student1 details are', s2)
+---------------------------------------------------------
+
+ID    NAME            MARKS
+---------------------------
+101   nithin		  98
+102	  nisha 		  99
+103	  noothan	  	  100
+ 
+----------------------------------------
+# Bubble sort
+
+class Student:
+    idGenerator = 101 # static variable
+    def __init__(self, name = '', marks = 0):
+        self.id = Student.idGenerator
+        self.name = name
+        self.marks = marks
+        Student.idGenerator += 1
+
+    def __str__(self):
+        studentStr =  'Id=' + str(self.id) + ', Name=' + self.name + ', Marks=' + str(self.marks)
+        return studentStr
+
+class StudentOperations:
+    def createStudent(self, students):
+        name = input('Enter name of the student: ')
+        marks = int(input('Enter marks of the student: '))
+        student = Student(name, marks)
+        students.append(student)
+
+    def listStudents(self, students):
+        if len(students) == 0:
+            print('There are no student records')
+            return
+        print('%-5s %-15s %-3s'%('ID', 'NAME', 'MARKS'))
+        print('-' * 26)
+        for student in students:
+            print('%-4s %-15s %-3s'%(student.id, student.name, student.marks))
+
+    def sortStudents(self, students):
+        if len(students) == 0:
+            print('There are no student records')
+            return
+        for i in range(0, len(students)-1):
+            sorted = True #Assume list is sorted
+            for j in range(len(students)-i-1):
+                 if students[j].marks > students[j+1].marks:
+                     students[j], students[j+1] = students[j+1], students[j]
+                     sorted = False
+            if sorted:
+                break #break the outer loop
+    
+    def updateStudent(self, students):
+        if len(students) == 0:
+            print('There are no student records')
+            return
+        id = int(input('Enter Id of the student to update the marks: '))
+        studentFound = False
+        for student in students:
+            if student.id == id:
+                studentFound = True
+                newMarks = int(input('Enter new marks of the student: '))
+                student.marks = newMarks
+                break
+        if not studentFound:
+            print(f'Student with Id={id} was not found')
+
+    def deleteStudent(self, students):
+        if len(students) == 0:
+            print('There are no student records')
+            return
+        id = int(input('Enter Id of the student to delete the record: '))
+        studentFound = False
+        for i in range(len(students)):
+            if students[i].id == id:
+                studentFound = True
+                print(f'Student with Name={students[i].name} is deleted')
+                del students[i]
+                break
+        if not studentFound:
+            print(f'Student with Id={id} was not found')
+
+    def searchStudent(self, students):
+        if len(students) == 0:
+            print('There are no student records')
+            return
+        id = int(input('Enter Id of the student to search the record: '))
+        studentFound = False
+        for i in range(len(students)):
+            if students[i].id == id:
+                studentFound = True
+                print(f'Student with Name={students[i].name} is found')
+                break
+        if not studentFound:
+            print(f'Student with Id={id} was not found')    
+
+class Menu:
+    def __init__(self, studOprsReference):
+        self.studOprs = studOprsReference
+
+    def exitProgram(self, students):
+        exit('End of the program')
+
+    def invalidInput(self, students):
+        print('Invalid input entered')
+
+    def getMenu(self, students):
+        menu = {
+            1 : self.studOprs.createStudent,
+            2 : self.studOprs.listStudents,
+            3 : self.studOprs.sortStudents,
+            4 : self.studOprs.updateStudent,
+            5 : self.studOprs.deleteStudent,
+            6 : self.studOprs.searchStudent,
+            7 : self.exitProgram
+        }
+        return menu
+
+    def runMenu(self, students):
+        menu = self.getMenu(students)
+        while True:
+            print('\n 1:Create 2:List 3:Sort 4:Update 5:Delete 6:Search 7:Exit \n Your choice: ')
+            choice = int(input())
+            menu.get(choice, self.invalidInput)(students)
+
+def startApp():
+    students = []
+    oprs = StudentOperations()
+    menu = Menu(oprs)
+    menu.runMenu(students)
+
+startApp()
+----------------------------------------------- 
+for (Student& student : students) {
+
+}
+-----------------------------------------------
+SELECTION SORT:
+
+19  23  7  2  5  11  3  17  29
+for i from 0 to n-1 do:
+	element = array[i]
+	k = i
+	for j from i+1 to n-1 do:
+		if array[j] < element then:
+			element = array[j]
+			k = j
+	swap array[i], array[k]
+------------------------------------------------------
+def selectionSort(array):
+    for i in range(len(array)):
+        element = array[i]
+        k = i
+        for j in range(i+1, len(array)):
+            if array[j] < element:
+                element = array[j]
+                k = j
+        array[i], array[k] = array[k], array[i]
+
+numbers = '19  23  7  2  5  11  3  17  29'
+array = [int(item) for item in numbers.split()]
+selectionSort(array)
+print('Unsorted Array is', numbers)
+numbers = ' '.join([str(item) for item in array])
+print('Sorted Array is', numbers)
+----------------------------------------------------------------
+19  23  7  2  5  11  3  17  29
+
+19  23  7  2        5  11  3  17  29
+
+19  23      7  2        5  11  3  17  29
+
+19      23      7  2        5  11  3  17  29
+
+19      23      7      2        5  11  3  17  29
+
+19      23      7      2        5  11      3  17  29
+
+19      23      7      2        5      11      3  17  29
+
+19      23      7      2        5      11      3      17  29
+
+19      23      7      2        5      11      3      17      29
+-----------------
+19      23      7      2        5      11      3      17      29
+i=1    j=1
+
+19  23       7      2        5      11      3      17      29
+
+19  23       2  7        5      11      3      17      29
+
+19  23      2  7        5  11      3      17     29
+
+19  23      2  7        5  11      3  17     29
+
+19  23      2  7        5  11      3  17  29
+
+2  7  19  23      5  11         3  17  29
+
+2  7  19  23      5  11         3  17  29
+
+2  7  19  23        3  5  11  17  29
+
+2  3  5  7  11  17  19  23  29
+
+mergeSort(array, low, high):
+	if low < high:
+		mid = (low + high) // 2
+		mergeSort(array, low, mid-1)
+		mergeSort(array, mid, high)
+		merge(array, low, mid, high)
+		
+merge(array, low, mid, high):
+	
+	
+----------------------------------------------------
+# Python program for implementation of MergeSort
+ 
+# Merges two subarrays of arr[].
+# First subarray is arr[low..mid]
+# Second subarray is arr[mid+1..high]
+
+def merge(arr, l, m, r):
+    n1 = m - l + 1
+    n2 = r - m
+ 
+    # create temp arrays
+    L = [0] * (n1)
+    R = [0] * (n2)
+ 
+    # Copy data to temp arrays L[] and R[]
+    for i in range(0, n1):
+        L[i] = arr[l + i]
+ 
+    for j in range(0, n2):
+        R[j] = arr[m + 1 + j]
+ 
+    # Merge the temp arrays back into arr[l..r]
+    i = 0     # Initial index of first subarray
+    j = 0     # Initial index of second subarray
+    k = l     # Initial index of merged subarray
+ 
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
+ 
+    # Copy the remaining elements of L[], if there
+    # are any
+    while i < n1:
+        arr[k] = L[i]
+        i += 1
+        k += 1
+ 
+    # Copy the remaining elements of R[], if there
+    # are any
+    while j < n2:
+        arr[k] = R[j]
+        j += 1
+        k += 1
+ 
+# l is for left index and r is right index of the
+# sub-array of arr to be sorted
+  
+def mergeSort(arr, l, r):
+    if l < r:
+        # Same as (l+r)//2, but avoids overflow for
+        # large l and h
+        m = l+(r-l)//2
+ 
+        # Sort first and second halves
+        mergeSort(arr, l, m)
+        mergeSort(arr, m+1, r)
+        merge(arr, l, m, r)
+ 
+# Driver code to test above
+arr = [12, 11, 13, 5, 6, 7]
+n = len(arr)
+print("Given array is")
+for i in range(n):
+    print("%d" % arr[i],end=" ")
+ 
+mergeSort(arr, 0, n-1)
+print("\n\nSorted array is")
+for i in range(n):
+    print("%d" % arr[i],end=" ")
+-------------------------------------------------
+# connecting to the DB using pymysql module
+
+import pymysql
+
+def connectDb():
+    conn = pymysql.Connect(
+        host='localhost', port=3306,
+        user='root', password='Root1',
+        db='nithin_db', charset='utf8')
+    return conn
+
+try:
+    connection = connectDb()
+    print('Database connected successfully')
+    connection.close() # disconnect the DB
+    print('Database disconnected successfully')
+except:
+    print('Some error occurred while connecting the database')
+-----------------------------------------------------------
+# connecting to the DB using pymysql module
+
+import pymysql
+
+# class A : public B {};  C++ syntax
+# class A extends B {}   Java syntax
+
+class TableCreationException(Exception):
+    pass
+
+def connectDb():
+    conn = pymysql.Connect(
+        host='localhost', port=3306,
+        user='root', password='Root123',
+        db='nithin_db', charset='utf8')
+    return conn
+
+def createTable():
+    createTableQuery = 'create table IF NOT EXISTS games(id int primary key auto_increment, name varchar(50) not null, price int, constraint new check(price % 100 = 0), mininum_players int default(1), maximum_players int default(11), description varchar(1000));'
+    try:
+        connection = connectDb()
+        print('Database connected successfully')
+        cursor = connection.cursor()
+        returnValue = cursor.execute(createTableQuery)
+        if returnValue != 0:
+            raise TableCreationException
+        print('Return value = ', returnValue)
+        connection.commit()
+        
+    except TableCreationException:
+        print('Error while creating the table ABC')
+    except pymysql.err.OperationalError:
+        print('Error while creating the table XYZ')
+    except:
+        print('Some error occurred while connecting the database')
+    finally:
+        cursor.close()
+        connection.close() # disconnect the DB
+        print('Database disconnected successfully')
+
+createTable()
+---------------------------------------------------------------
+scanf("%[^@]s", inputString);
+
+# connecting to the DB using pymysql module
+import sys
+import pymysql
+
+# class A : public B {};  C++ syntax
+# class A extends B {}   Java syntax
+
+class DbOperationException(Exception):
+    pass
+
+class GameDataOperations:
+    def connectDb(self):
+        conn = pymysql.Connect(
+            host='localhost', port=3306,
+            user='root', password='Root123',
+            db='nithin_db', charset='utf8')
+        print('Database connected successfully')
+        return conn
+
+    def disConnectDb(self, connection):
+        connection.close()
+        print('Database disconnected successfully')
+
+    def createTable(self):
+        createTableQuery = 'create table IF NOT EXISTS games(id int primary key auto_increment, name varchar(50) not null, price int, constraint new check(price % 100 = 0), mininum_players int default(1), maximum_players int default(11), description varchar(1000));'
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            returnValue = cursor.execute(createTableQuery)
+            if returnValue != 0:
+                raise DbOperationException
+            print('Return value = ', returnValue)
+            connection.commit()    
+        except DbOperationException:
+            print('Error while creating the table ABC')
+        except pymysql.err.OperationalError:
+            print('Error while creating the table XYZ')
+        except:
+            print('Error in connecting to the database')
+        finally:
+            cursor.close()
+            self.disConnectDb(connection)
+            
+    def createDb(self):
+        createDbQuery = 'create database IF NOT EXISTS nmamit_db'
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            returnValue = cursor.execute(createDbQuery)
+            cursor.close()
+        except:
+            print('Error in connecting to the database')
+
+    def readGameData(self, operation):
+        name = input('Enter name of the Game: ')
+        price = int(input('Enter Price of the Game (per head): '))
+        minPlayers = int(input('Enter minimum number of players: '))
+        maxPlayers = int(input('Enter maximum number of players: '))
+        if operation == 'insert':
+            print('Enter Description of the Game, Use Ctrl+Z to stop: ')
+            sys.stdin.flush()
+            description = sys.stdin.read()
+            description = description.replace('\n', ' ').strip()
+            return (name, price, minPlayers, maxPlayers, description)
+        id = int(input('Enter Id of the Game to update: '))
+        return (name, price, minPlayers, maxPlayers, id)
+
+    def createGame(self):
+        insertQuery = 'insert into games(name, price, mininum_players, maximum_players, description) values(%s, %s, %s, %s, %s)'
+        gameObject = self.readGameData('insert')
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            returnValue = cursor.execute(insertQuery, gameObject)
+            print('Return Value = ', returnValue)
+            if returnValue != 1:
+                raise DbOperationException
+            connection.commit()
+            print('Row inserted successfully')
+            cursor.close()
+            self.disConnectDb(connection)
+        except DbOperationException:
+            print('Error while inserting a row')
+        except pymysql.err.OperationalError:
+            print('Row Insert failed')
+        except pymysql.err.ProgrammingError:
+            print('Invalid insert command given')
+        except Exception as e:
+            print(e)
+            print('Some Unknown Error occured')
+
+    def updateGame(self):
+        updateQuery = 'update games set name = %s, price = %s, mininum_players = %s, maximum_players = %s where id = %s'
+        gameObject = self.readGameData('update')
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            returnValue = cursor.execute(updateQuery, gameObject)
+            connection.commit()
+            if returnValue != 1:
+                print(f'Game with id = {gameObject[4]} not found')
+            else:
+                print('Row update successful')
+            cursor.close()
+            self.disConnectDb(connection)
+        except:
+            print('Row Update failed')
+
+    def deleteGame(self):
+        id = int(input('Enter Id of the Game to be deleted: '))
+        updateQuery = f'delete from games where id = {id}'
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            returnValue = cursor.execute(updateQuery)
+            connection.commit()
+            if returnValue != 1:
+                print(f'Game with id = {id} not found')
+            else:
+                print('Row delete successful')
+            cursor.close()
+            self.disConnectDb(connection)
+        except:
+            print('Row Delete failed')
+
+    def searchGame(self):
+        id = int(input('Enter Id of the Game to be searched: '))
+        searchQuery = f'select * from games where id = {id}'
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            numberOfRows = cursor.execute(searchQuery)
+            if numberOfRows == 0:
+                print(f'Game with id = {id} not found')
+            else:
+                row = cursor.fetchone()
+                print('Game Details is: \n', str(row))
+            connection.commit()
+            cursor.close()
+            self.disConnectDb(connection)
+        except pymysql.err.DataError:
+            print('Row Search failed')
+
+    def listGames(self):
+        query = f'select * from games'
+        try:
+            connection = self.connectDb()
+            cursor = connection.cursor()
+            numberOfRows = cursor.execute(query)
+            connection.commit()
+            rows = cursor.fetchall()
+            if rows is None:
+                print(f'Game with id = {id} not found')
+            else:
+                for row in rows:
+                    print('Game Details is: \n', str(row))
+            cursor.close()
+            self.disConnectDb(connection)
+        except pymysql.err.DataError:
+            print('Row Search failed')
+
+class Menu:
+    def __init__(self, gameOperations):
+        self.gameOperations = gameOperations
+
+    def exitProgram(self):
+        exit('End of the program')
+
+    def invalidInput(self):
+        print('Invalid input entered')
+
+    def getMenu(self):
+        menu = {
+            1 : self.gameOperations.createGame,
+            2 : self.gameOperations.searchGame,
+            3 : self.gameOperations.updateGame,
+            4 : self.gameOperations.deleteGame,
+            5 : self.gameOperations.listGames,
+            6 : self.exitProgram
+        }
+        return menu
+
+    def runMenu(self):
+        menu = self.getMenu()
+        while True:
+            print('\n 1:Create 2:Search 3:Update 4:Delete 5:ListAll 6:Exit \n Your choice: ')
+            choice = int(input())
+            menu.get(choice, self.invalidInput)()
+
+def startApp():
+    operations = GameDataOperations()
+    menu = Menu(operations)
+    menu.runMenu()
+
+startApp()
+-----------------------------------------------------------------
+def checkArrangement(boys, girls):
+    for i in range(1, len(boys)):
+        if boys[i] < girls[i-1] or girls[i] < boys[i-1]:
+            return 'NO'
+    if (girls[0] <= boys[0] and girls[-1] > boys[-1]) or (boys[0] <= girls[0] and boys[-1] > girls[-1]):
+        return 'NO'
+    return 'YES'
+'''
+b = 4 5 5
+g = 3 5 7
+3 4 5 5 7 5
+'''
+T = int(input('Enter number of test cases: '))
+arrangement = []
+for i in range(T):
+    boys = []
+    girls = list()
+    N = int(input('Enter number of Boys/Girls: '))
+    print(f'Enter hieghts of {N} boys')
+    for i in range(N):
+        boys.append(int(input()))
+    print(f'Enter hieghts of {N} girls')
+    for i in range(N):
+        girls.append(int(input()))
+    boys = sorted(boys)
+    girls.sort()
+    print(f'Boys={boys}, Girls={girls}')
+    arrangement.append(checkArrangement(boys, girls))
+
+for element in arrangement:
+    print(element)
+-----------------------------------------------------------------
+b(reak): Sets a breakpoint at the current line.
+cl(ear): Removes a breakpoint.
+c(ont): Continues execution until the next breakpoint.
+d(own): Moves the current frame down one level.
+j(ump): Jumps to a specific line.
+l(ist): Lists the current source code.
+n(ext): Executes the next line of code.
+p(rint): Prints the value of an expression.
+q(uit): Exits the debugger.
+r(un): Continues execution until the program terminates.
+s(tep): Executes the next line of code step-by-step.
+t(op): Moves the current frame up one level.
+u(p): Prints the stack trace.
+w(here): Prints the current line number and function name.
+
+----------------------------------------------------------
+Read N (size of the Array)
+Read N elements of the Array
+Read X and Y (X + Y must be = N)
+sort Array
+p = array[y] - array[y-1] - 1
+print p
+Assume we are diving the Array into X[] and Y[]
+All elements in X are greater than some P elements
+All elements in Y are lesser than the same P elements
+How many such P elements is possible ?
+
+We notice that the X elements are greater and Y elements smaller
+The actual DS is array
+
+So, 
+the 1st element in the X array is array[y]
+the 1st element in the Y array is array[0]
+the last element in the X array is array[n-1]
+the last element in the Y array is array[y-1]
+
+inputSize = int(input('Enter size of array: '))
+array = []
+print(f'Enter {inputSize} numbers of the Array')
+for i in range(inputSize):
+    array.append(int(input()))
+print('Enter space seperated X and Y values')
+x, y = list(map(int, input().split()))
+if x + y != inputSize:
+    exit('Invalid Input entered. Program ends here')
+
+array.sort()
+p = array[y] - array[y-1] - 1
+print('The numbers of elements which satisfy the given condition is ', p)
+-----------------------------------------------------------
+https://token@github.com/neelmyna/nitte2024.git
+
