@@ -1268,3 +1268,175 @@ print('The numbers of elements which satisfy the given condition is ', p)
 -----------------------------------------------------------
 https://token@github.com/neelmyna/nitte2024.git
 
+https://github.com/neelmyna/nitte2024
+
+RUN LENGTH ENCODING PROBLEM:
+hhhhhmmeeeeerrrrttppp
+h5m2e6r4t2p3
+
+inputStr = input("Enter the string to be compressed: ")
+prevChar = inputStr[0]
+currChar = ''
+count = 1
+j = 0
+compressedStr = ''
+for i in range(1, len(inputStr)):
+    currChar = inputStr[i]
+    if prevChar == currChar:
+        count += 1
+    else:
+        compressedStr += prevChar
+        compressedStr += str(count)
+        j += 2
+        count = 1
+        prevChar = currChar
+compressedStr += prevChar
+compressedStr += str(count)
+print("Compressed String = " + compressedStr)
+
+DE-COMPRESS ALGORITHM:
+
+
+Spiral Matrix Problem:
+Read a Matrix of order (m, n) and print the Matrix elements in Spiral Traversal: (Right->Left, Top->B, Left->Right, Bottom->Top)
+
+Karpekar's Constant Problem.
+
+1231
+
+3211
+1123
+2088
+
+def findSmallBigNum(number, numberType):
+    list1 = list(str(number))
+    list1.sort()
+    num = ''.join(list1)
+    if numberType == 'small':
+        return num # Returns number as a string
+    return num[::-1]
+
+def karpekarsConstant(number, count):
+    if number == 6174:
+        return count
+    smallNum = int(findSmallBigNum(number, 'small'))
+    bigNum = int(findSmallBigNum(number, 'big'))
+    difference = bigNum - smallNum
+    print(bigNum, '  ', smallNum,  '  ', difference)
+    count += 1
+    return karpekarsConstant(difference, count)
+    
+inputNum = int(input('Enter a 4 digit number with minimum 2 distinct digits: '))
+
+count = karpekarsConstant(inputNum, 0)
+print(f'It took {count} recursive calls to reach 6174 from {inputNum}')
+--------------------------------------
+LINKED LIST:
+
+class Node:
+    def __init__(self):
+        self.data = input('Enter data of the new Node: ')
+        self.link = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insertNode(self):
+        position = int(input('Enter position of the new node: '))
+        node = Node()
+        if self.head == None:
+            self.head = node
+            return
+        if position == 1:
+            node.link = self.head
+            self.head = node
+            return
+        temp = self.head
+        i = 2
+        while temp.link != None and i < position:
+            i += 1
+            temp = temp.link
+        if temp.link == None:
+            temp.link = node
+            return
+        node.link = temp.link
+        temp.link = node
+
+    def displayList(self):
+        if self.head == None:
+            print('List is empty')
+            return
+        temp = self.head
+        while temp != None:
+            if temp.link != None:
+                print(temp.data + ' -> ', end='')   
+            else:
+                print(temp.data)
+            temp = temp.link
+
+    def deleteNode(self):
+        if self.head == None:
+            print('List is empty')
+            return
+        position = int(input('Enter the position of the node to be deleted: '))
+        if position == 1:
+            print(f'Node with data {self.head.data} is deleted')
+            self.head = self.head.link
+            return
+        i = 1
+        temp2 = None
+        temp1 = self.head
+        while temp1.link != None and i < position:
+            i += 1
+            temp2 = temp1
+            temp1 = temp1.link
+        if temp1.link == None and position > i:
+            print('Invalid position enetered')
+            return
+        if i == position-1 and temp1.link == None:
+            print(f'Node with data {temp1.data} is deleted')
+            temp2.link = None
+            return
+        print(f'Node with data {temp1.data} is deleted')
+        temp2.link = temp1.link
+
+class Menu:
+    def __init__(self, listObject):
+        self.listObject = listObject
+
+    def exitProgram(self):
+        exit('End of Program')
+    
+    def invalidChoice(self):
+        print('Invalid choice entered')
+
+    def getMenu(self):
+        menu = {
+            1 : self.listObject.insertNode,
+            2 : self.listObject.deleteNode,
+            3 : self.listObject.displayList,
+            4 : self.exitProgram
+        }
+        return menu
+    
+    def runMenu(self):
+        menu = self.getMenu()
+        while True:
+            choice = int(input('1:Insert 2:Delete 3:DisplayList 4:Exit Your choice Plz: '))
+            menu.get(choice, self.invalidChoice)()
+
+def startApp():
+    list = LinkedList()
+    menuObj = Menu(list)
+    menuObj.runMenu()
+
+startApp()
+
+'''
+insert at position:
+If invalid position is given (bigger than length of the list) then new node is inserted at rare. 
+delete specific node
+if invalid positon is given, then error msg is printed
+display list
+'''
