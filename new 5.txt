@@ -1440,3 +1440,54 @@ delete specific node
 if invalid positon is given, then error msg is printed
 display list
 '''
+--------------------------------------------
+TREES
+* A Tree is acyclic DS (Hierarchical). No cycles in the DS.
+* There is only one entry point which is called as ROOT of the Tree.
+* The data in the Tree are stored in NODES which are connected.
+* The ROOT is the 1st Node accessible in the Tree.
+* The Nodes that are accessible from current Node is said to be CHILD Nodes which are also the descendents.
+* A Node with no chil nodes is called as LEAF node.
+* A Tree with every node having atmost 2 child nodes is said to be BINARY TREE.
+* The Root node is said to be at a level 1 and its immediate child nodes at level 2 and their child nodes at level 3 and so on.
+* The maximum possible level in a Tree is said to be the HEIGHT/DEPTH of the Tree.
+* Reaching a Leaf node from the Root while remembering the nodes accessed is said to be a PATH in the Tree.
+* There is only one path (unique) to reach any node in a Tree.
+* The maximum possible number of Nodes in a Binary Tree is
+([2 power n]-1) nodes (which is Odd number).
+* If a Binary Tree has exactly 2(n)-1 nodes then it is said to be COMPLETE BINARY TREE and also it is said to FULLY BALANCED BINARY TREE.
+* Some Authors call a Binary Tree as B-Tree as well.
+* As we know that in a Binary Tree every node has 0 or 1 or 2 child nodes, and, while technically implementing a Binary Tree, we know that there must be 2 LINKS in every node. These links can be named as Left Link and Right Link which respectively point to the LEFT CHILD and the RIGHT CHILD.
+* If a Binary Tree of Depth N has almost or exactly 2(N)-1 nodes in it, then the Tree is said to be BALANCED Tree.
+If in a Binary Tree, the data of every node is ARRANGED in such a way that, the Left Child Data is less than the data of its PARENT node and the Right Child data is greater than or equal to its Parent node data, then such a Binary Tree is called as BINARY SEARCH TREE (BST) which is one of the most popular DS.
+* If a BST is a Balanced BST, then searching a node in the BBST would result in log(N) efficiency. This is evident with the fact that, with every descent in the Tree, we isolate almost 50% of the nodes of the Tree.
+* A Binary Tree with every node in it having exactly 0 or 2 child nodes only, is said to be a STRICTLY BINARY TREE.
+* A Binary Tree with all its nodes having only Left Child nodes or only Right Child Nodes is the Worst Possible Binary Tree, and it can be easily envisaged that such a Tree is actually a Linear Linked List. Also we can observe that it is the Tree with minimum possible number of nodes for the given Height of the Tree.
+* Accessing all the Nodes in a Tree in a specific manner is called as TRAVERSING the Binary Tree.
+* If we access all the nodes of the Binary Tree in Root-> LeftChild->RightChild then such a Traversal is said to be PRE-ORDER TRAVERSAL.
+* If we access all the nodes of the Binary Tree in LeftChild->Root-> ->RightChild then such a Traversal is said to be IN-ORDER TRAVERSAL.
+* If we access all the nodes of the Binary Tree in LeftChild-> ->RightChild->ROOT then such a Traversal is said to be POST-ORDER TRAVERSAL.
+* In all the 3 traversals, Left comes before Right. In other words, only the Root position is replaced.
+* While performing any action on a Binary Tree, we can observe that the same action is performed on arrival of every new node. Thus, the action we perform on the ROOT of the Tree is the same action we perform on reaching every new Child Node in the Tree. Thus while solving problems on a Binary Tree, on reaching a new node, we must consider itself as the Root and the Tree that forms with its descendens itself as a new Tree. This gives us a clue that the SOLUTION IS RECURSIVE in nature.
+* The nodes and thus the Tree that is formed with the Left Child of any Node in the Tree, is said to be LEFT SUB-TREE and on the same lines, we also can recognise the RIGHT SUB-TREE.
+* ADDING A NODE INTO A BST/BT:
+A new node is always added as a Leaf Node.
+* DELETING A NODE FROM A BST:
+	1. Node with 0 child nodes (Leaf Node): Make the respective link of its parent node, None/Null
+	2. Node with 1 child: Make the child of the node being deleted, as the child node of its parent in the same position as it was to its parent.
+	3. When a node to be deleted in a BST is having 2 child nodes, then, make the Right child of the node being deleted as right child of its parent. The left child and its descendents, i.e., the left sub tree of the node being deleted, is attached to the left most possible child of the right child node of the node being deleted.
+	
+* Write a program to reverse a SLL using:
+	1. Iterative method 		2. recursive
+* Merge 2 sorted SLLs into one
+* Sort a SLL using Bubble sort
+* Check if 2 SLLs CONVERGE at some point into a single list
+*** Create a AVL Tree and 2-3 Tree with the user given data
+*** Balance a BST
+*** Impliment the following operations on a BST:
+	1. Add new Node
+	2. Delete a Node (All 3 possibilities must be implemented)
+	3. Search a Node
+	4. Traverse the Tree in:
+		1.InOrder  2.PreOrder  3.PostOrder
+*** Given 2 Traversal of a BST, create the BST.
