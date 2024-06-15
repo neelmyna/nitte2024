@@ -54,8 +54,73 @@ class BST:
             self.postOrder(temp.rightLink)
             print(temp.data)
 
+    def findLeftMost(self, temp):
+        if temp.leftLink is None:
+            return temp
+        while temp.leftLink != None:
+            temp = temp.leftLink
+        return temp
+    
     def deleteNode(self):
-        pass
+        data = int(input('Enter data of the Node to be deleted: '))
+        # Check if the Tree is empty
+        if self.root is None:
+            print('Tree is emptry')
+            return
+        # Check if the Tree is has onle the Root Node
+        if self.root.leftLink == self.root.rightLink:
+            # Check if the Only Node of the Tree is to be deleted
+            if self.root.data == data:
+                print(f'Node with data {data} is deleted')
+                self.root = None
+            else:
+                print(f'Node with data {data} is not found')
+            return
+        temp2, temp1 = None, self.root
+        # Tree has more than one node and hence we must traverse
+        while temp1.data != data:
+            temp2 = temp1
+            if data < temp1.data:
+                temp1 = temp1.leftLink
+            else:
+                temp1 = temp1.rightLink
+            if temp1 == None:
+                break
+        # Check if the target node is not found
+        if temp1 is None:
+            print(f'Node with data {data} is not found')
+            return
+        print(f'Node with data {data} is deleted')
+        # check if the node to be deleted is leaf node
+        if temp1.leftLink is None and temp1.rightLink is None:
+            #Check if the leaf node to be deleted is left or right child
+            if temp2.leftLink == temp1:
+                temp2.leftLink = None
+            else:
+                temp2.rightLink = None
+            return
+        #Check if node to be deleted has one child
+        if temp1.leftLink is None:
+            if temp2.leftLink == temp1:
+                temp2.leftLink = temp1.rightLink
+            else:
+                temp2.rightLink = temp1.rightLink
+        elif temp1.rightLink is None:
+            if temp2.leftLink == temp1:
+                temp2.leftLink = temp1.leftLink
+            else:
+                temp2.rightLink = temp1.leftLink
+        #Now the only option left is where node to be deleted has 2 child nodes
+        else:
+            # if Root is the node to be deleted
+            if temp2 is None:
+                rightMost = self.findRightMost(temp1.leftLink)
+                rightMost.rightLink = temp1.rightLink.leftLink
+                self.root = temp1 
+            else:
+                temp2.rightLink = temp1.rightLink
+                leftMost = self.findLeftMost(temp2.rightLink)
+                leftMost.leftLink = temp1.leftLink
 
 class Menu:
     def __init__(self, treeObject):

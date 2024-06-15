@@ -1,0 +1,2147 @@
+Training Manager Sudhakar: 9663301282
+Alchemy Nisha:
+
+* Harish and Girish are solving a problem, but they are stuck some where in between. Help them to solve the problem of 2 strings whose length cannot be more than 15 characters.
+* Each of the players are taking A number of their choice which is always single digit number but cannot be zero nor negative.
+* The player whose name starts alphabatically 1st, gives the number which goes into the variable 'n1' and the next number into 'n2'.
+* Now, the player whose name come alphabetically next, should give a string 1st which is saved in a variable 's1' and another string by another player in 's2'.
+* 
+If the 1st number, i.e. 'n1' is ODD, then right rotate the string 's1' by  'n1' times.
+* If the 2nd number 'n2' is Even, then Left rotate the string 's2' by 'n2' times.
+
+Girish - n1 - s2
+Harish - n2 - s1
+
+s1 = 'Vijayawada'
+s2 = 'Gannawaram'
+
+n1 = 7
+n2 = 4
+---------------------------------------
+Day2: Tuesday 18-10-2022
+Numpy
+import numpy as np
+
+Numpy Arrays:
+
+arr1 = np.zeros((1, 3)) # Created an Array of 1D (i.e. a single array) of 3 elements, all of which are zeroes. The Array created is nothing but a Python List.
+print(arr1)
+
+arr1 = np.zeros((3, 5)) # 3 rows each of 5 elements and all 15 elements will be zeros.
+print(arr1)
+---------------------------------------------
+import numpy as np
+
+To initialize an Array/List of multi dimentional, with all elements Zero:
+
+arr1 = np.zeros((3, 5))
+print(arr1)
+
+print(arr1[2][0]) # 3rd row 1st element
+print(type(arr1[2][0])) #numpy.float64 is nothing but double in C/C++/Java
+----------------------------
+To initialize an Array with a number other than Zero:
+Method is full()
+
+import numpy as np
+array2 = np.full((1, 5), 15) # Creates a List with a single List. Thus, array2 here, though has single List, it is 2D list.
+print(array2)
+
+print(array2[0]) # Prints the 1st list in the 2D list array2
+print(array2[0][1]) # Prints the 2nd element in the 1st list of array2
+print(array2[1][0]) # Error. There is no 2nd list in array2
+-------------------------------------------
+import numpy as np
+array2 = np.full((3, 2), 5) 
+print(array2)
+print(array2[2][2]) # Error there is no 3rd element in the 3rd row
+print(array2[2][1]) # 5
+---------------------------------------
+To Create numpy array/list with a range of values:
+Method is arange()
+It takes 2 arguments or 3 arguments
+arange(1, 10) # The range is from 1 to 9. Note that the 2nd Arg is excluded.
+arange(1, 20, 3) # The 3rd Arg depicts the increment for every element in the List
+
+Note: arange() create a 1D List and not 2D list
+
+arr3 = numpy.arange(1, 10)
+arr4 = numpy.arange(1, 20, 4)
+------------------------------
+np.array([[1,2],[3,4]])
+OUT:
+array([[1, 2], [3, 4]])
+-----------------------------------------
+np.zeros((3,1))
+OUT:
+array([[0.],
+       [0.],
+       [0.]])
+---------------------------------------
+You can also initialize an array with ones instead of zeros:
+
+np.ones((3, 1))
+OUT:
+array([[1.],
+       [1.],
+       [1.]])
+--------------------------------------
+np.full() creates an array repeating a fixed value (defaults to zero). Here we create a 2x3 array with the number 7 in each element:
+
+np.full((2,3),7)
+OUT:
+array([[7, 7, 7],
+       [7, 7, 7]])
+--------------------------------------
+Array shape
+All arrays have a shape accessible using .shape
+For example, let's get the shape of a vector, matrix, and tensor.
+
+vector = np.arange(5)
+print('Vector:', vector)
+print("Vector shape:", vector.shape)
+
+matrix = np.ones([3, 2])
+print("Matrix:", matrix
+print("Matrix shape:", matrix.shape)
+
+tensor = np.zeros([2, 3, 3])
+print("Tensor:', tensor)
+print("Tensor shape:", tensor.shape)
+
+print(tensor[0][1][1]) #Prints the 1st Matrix's 2nd Row, 2nd element
+----------------------------------------
+arr = np.arange(1, 10)
+print(arr, '\n')
+
+# Reshape to 3x3 matrix
+arr = arr.reshape(3, 3)
+print(arr, '\n')
+
+# Reshape back to the original size
+arr = arr.reshape(9)
+print(arr)
+----------------------------------------
+import numpy as np
+
+arr1 = np.arange(12)
+
+arr2 = arr1.reshape(2, 6)
+arr3 = arr1.reshape(6, 2)
+arr4 = arr1.reshape(3, 4)
+arr5 = arr1.reshape(12, 1)
+
+print('Arr1:\n', arr1)
+print('Arr2:\n', arr2)
+print('Arr3:\n', arr3)
+print('Arr4:\n', arr4)
+print('Arr5:\n', arr5)
+--------------------------------------------------
+
+----------------------------------------
+Numpy can try to infer one of the dimensions if you use -1. You will still need to have precisely the correct number of digits for the inference to work.
+
+arr = np.arange(1, 10).reshape(3, -1)
+print(arr)
+--------------------------------------------
+import numpy as np
+
+arr1 = np.arange(1, 10)
+arr2 = np.arange(2, 25, 2)
+
+arr3 = arr1.reshape(3, -1)
+arr4 = arr2.reshape(4, -1)
+arr5 = arr2.reshape(2, -1)
+arr6 = arr2.reshape(3, -1)
+
+arr7 = arr2.reshape(-1, 4) # Numpy predicts and fixes the number of rows
+
+print('Arr1:\n', arr1)
+print('Arr2:\n', arr2)
+print('Arr3:\n', arr3)
+print('Arr4:\n', arr4)
+print('Arr5:\n', arr5)
+print('Arr6:\n', arr6)
+print('Arr6:\n', arr7)
+-----------------------------------------
+inputNum = int(input("Enter a number to find sum of its digits: "))
+
+temp = inputNum
+sumOfDigits = 0
+
+while temp != 0:
+	remainderDigit = temp % 10
+	sumOfDigits = sumOfDigits + remainderDigit
+	temp = temp // 10 #integer division is important
+
+print(f'Sum of the digits of {inputNum} is {sumOfDigits}')
+--------------------------------------------
+1 day - Fundamentals (Left over topics)
+------------------------
+2 days - Intermediate
+------------------------
+5 days - Advanced
+------------------------
+1 day - Case Study (Revision)
+------------------------
+def findCountOfDigits1(tempNum):
+	countOfDigits = 0
+	while tempNum != 0:
+		countOfDigits += 1
+		tempNum = tempNum // 10 #integer division is important
+	return countOfDigits
+
+def findCountOfDigits2(tempNum):
+	tempNum = str(tempNum)
+	return len(tempNum)
+
+
+inputNum = int(input("Enter a number to find sum of its digits: "))
+
+temp = inputNum
+countOfDigits = findCountOfDigits2(inputNum)
+print(f'Count of the digits in {inputNum} is {countOfDigits}')
+-------------------------------------------------
+In Python, passing the primitive values is always done using CALL BY VALUE
+def func(num):
+	print("num from func before changing its value = ", num)
+	num = 50
+	print("num from func after changing its value = ", num)
+
+#Note, once the func() ends, the local variable 'num' is deleted. And it is also accessible only inside func()
+
+num = 5
+print("num from main before changing its value = ", num)
+func(num) # Call by value (We are passing a COPY of num to the function func() )
+print("num from main after function call = ", num)
+# Here we observe that the modified value in CALLED FUNCTION is not updated in calling function
+num = 25
+print("num from main after changing its value = ", num)
+----------------------------------------------------------------
+def func(list1): # We have received the reference value of the list object
+	print("num from func before changing its value = ", list1)
+	list1.remove(1.1)
+	print("num from func after changing its value = ", list1)
+
+numbers = [2.5, 3.3, 5.5, 1.1]
+print("List from main before changing its value = ", numbers)
+func(numbers) # Call by Reference (We are passing the reference value of the List Object and not the object itself)
+print("List from main after function call = ", numbers)
+numbers.insert(3, 30.3)
+print("List from main after changing its value = ", numbers)
+----------------------------------------------------
+Example for Stack Overflow in case of Recursive function
+def infiniteLoop(num): # Recursive Function
+	print("HCL Vijayawada - ", num)
+	infiniteLoop(num+1)  # Recursive Call
+
+infiniteLoop(1)
+---------------------------------------
+Example for Stack Overflow in case of Recursive function
+USE OF GLOBAL VARIABLE
+def infiniteLoop(): # Recursive Function
+	global num
+	print("HCL Vijayawada - ", num)
+	num += 1
+	infiniteLoop()  # Recursive Call
+
+num = 1
+infiniteLoop()
+----------------------------------------------
+#Program to find Factorial of a number using Recursion
+
+def findFactorial(num):
+	if num == 1 or num == 0:
+		return 1
+	return num * findFactorial(num-1)
+
+inputNum = int(input("Enter a number to find its Factorial: "))
+print(f'Factorial of {inputNum} is {findFactorial(inputNum)}')
+-----------------------------------------------
+#Program to find sum of Array numbers of size 'n' using Recursive F
+
+def findSum(numbers, size):
+	if size == 1:
+		return numbers[0]
+	return numbers[size-1] + findSum(numbers, size-1)
+
+n = int(input("Enter size of the Array: "))
+numbers = list()
+
+print(f'Enter {n} numbers of the Array')
+for i in range(n):
+	numbers.append(int(input()))
+sumOfNumbers = findSum(numbers, n)
+
+print(f'Sum of the Array numbers is {sumOfNumbers}')
+-----------------------------
+def f():
+	pass  # It is define an empty block of stmts. Without this, the intepreter will give an error
+
+#This is global scope
+print("Hello World")
+if 5 > 3:
+	pass # One more example
+-------------------------------------------
+# Program to implement a Menu  
+
+def f1():
+	print("To do things of Monday")
+
+def f2():
+	print("To do things of Tuesday")
+
+def f3():
+	print("To do things of Wednesday")
+
+def f4():
+	exit("End of program")
+
+def f5():
+	print("Invalid choice entered")
+
+menu = {
+	1 : f1,
+	2 : f2,
+	3 : f3,
+	4 : f4
+}
+
+while True:
+	print("1:Monday 2:Tuesday 3:Wednesday 4:ExitProgram \n Your Choice? ", end="")
+	choice = int(input("Enter your choice: "))
+	menu.get(choice, f5)()
+---------------------------------------
+# Program to implement a Menu  
+
+def pushElement(stk):
+	print("Enter element to be pushed: ", end='')
+	stk.append(input())
+
+def popElement(stk):
+	if len(stk) == 0:
+		print('Stack is empty')
+		return
+	print(f'Popped element is {stk[-1]}')
+	del stk[-1]
+
+def diaplayStack(stk):
+	if len(stk) == 0:
+		print('Stack is empty')
+		return
+	print('Stack elements are: ', end='')
+	for i in range(len(stk)-1, -1, -1):
+		print(stk[i], end='  ')
+
+def exitProgram(stk):
+	exit("End of program")
+
+def f5(stk):
+	print("Invalid choice entered")
+
+menu = {
+	1 : pushElement,
+	2 : popElement,
+	3 : diaplayStack,
+	4 : exitProgram
+}
+
+stk = []
+
+while True:
+	print("\n1:Push 2:Pop 3:DisplayStack 4:ExitProgram \n Your Choice? ", end='')
+	choice = int(input("Enter your choice: "))
+	menu.get(choice, f5)(stk)
+----------------------------------------------
+# Program to implement a Menu  
+
+def pushElement(stk):
+	print("Enter element to be pushed: ", end='')
+	stk.insert(0, input())
+	#stk.append(input()) # adding element at the end/rear
+
+def popElement(stk):
+	if len(stk) == 0:
+		print('Stack is empty')
+		return
+	print(f'Popped element is {stk[0]}')
+	del stk[0]
+	#del stk[-1] # deleting the last element (from rear)
+
+def diaplayStack(stk):
+	if len(stk) == 0:
+		print('Stack is empty')
+		return
+	print('Stack elements are: ', end='')
+	for i in range(len(stk)): #Moving from 1st ele to rear
+		print(stk[i], end='  ')
+
+def exitProgram(stk):
+	exit("End of program")
+
+def invalidChoice(stk):
+	print("Invalid choice entered")
+
+menu = {
+	1 : pushElement,
+	2 : popElement,
+	3 : diaplayStack,
+	4 : exitProgram
+}
+
+stk = []
+while True:
+	print("\n1:Push 2:Pop 3:DisplayStack 4:ExitProgram \n Your Choice? ", end='')
+	choice = int(input("Enter your choice: "))
+	menu.get(choice, invalidChoice)(stk)
+---------------------------------------------------------
+fo = open("D:\\Python Programs\\practice\\textfile1.txt", "r")
+#opening a file in read mode
+print ("Name of the file: ", fo.name)#printing the printing file 
+print ("File Closed ? : ", fo.closed) #returns truth value
+print ("Opening mode : ", fo.mode) # file opening mode
+fo.close() # saves the file on the disk
+print ("File Closed? : ", fo.closed)
+----------------------------------------------------
+import pickle
+
+class Student:
+
+	def __init__(self):
+		self.name = ""
+		self.marks = 0
+		self.sem = 0
+		self.branch = ""
+
+	def __init__(self, name, marks, sem, branch):
+		self.name = name
+		self.marks = marks
+		self.sem = sem
+		self.branch = branch
+
+stud1 = Student('Raam', 95, 7, 'ECE')
+
+fo = open("file1.pkl", "ab")
+pickle.dump(stud1, fo, pickle.HIGHEST_PROTOCOL)
+print("Writing to the file Over")
+fo.close()
+
+print("Reading Object from the file:")
+with open('file1.pkl', 'rb') as inputFilePtr:
+	stud1 = pickle.load(inputFilePtr)
+	print('Student Name:  ' + stud1.name)
+	print('Student Marks: ' + str(stud1.marks))
+	print('Student Sem:   ' + str(stud1.sem))
+	print('Student Branch:' + stud1.branch)
+----------------------------------------------------
+import sys
+
+class Stack:
+
+	def __init__(self, size):
+		self.sp = -1
+		self.stk = []
+		self.stackSize = size
+		print(f'An empty Stack of size {self.stackSize} is created')
+
+	def push(self):
+		if self.sp == self.stackSize-1:
+			print('Stack Overflow')
+			return
+		print('Enter the element to be pushed: ', end='')
+		self.stk.append(input())
+		self.sp += 1
+
+	def pop(self):
+		if self.sp == -1:
+			print('Stack Underflow')
+			return
+		print(f'Popped element is {self.stk[-1]}')
+		del self.stk[-1]
+		self.sp -= 1
+
+	def display(self):
+		if self.sp == -1:
+			print('Stack is empty')
+			return
+		print('Stack elements are: ', end='')
+		tempStk = self.stk[::-1]
+		for element in tempStk:
+			print(element, end='  ')
+
+def exitProgram():
+	sys.exit("System Exiting")
+
+def printError():
+	print('Invalid choice entered')
+
+def stackDemo():
+	stkSize = int(input('Enter size of the Stack: '))
+	stkObj = Stack(stkSize)
+	menu = {
+		1 : stkObj.push,
+		2 : stkObj.pop,
+		3 : stkObj.display,
+		4 : exitProgram
+	}
+	while True:
+		print('\n1:Push 2:Pop 3:Display 4:Exit,  Your Choice? ', end='')
+		choice = int(input())
+		menu.get(choice, printError)()
+
+stackDemo()
+----------------------------------------------------
+class BankAccount:
+
+	def __init__(self):
+		self.accNum = 0
+		self.accHolderName = ''
+		self.balance = 0.0
+		self.accType = ''
+		print(f'Your account is created.\nEnter your Details now.')
+	
+	def createAccount(self):
+		self.accHolderName = input('Enter your name: ')
+		self.balance = float(input('Enter your initial balance: '))
+		self.accType = input('Choose type of Account you wish\n(Student, Employee, Business)')
+		print(f'Congratulations {self.accHolderName}, Your Acc-Num is {self.accNum}')
+
+	def deleteAccount(self):
+		print(f'Your balance amount of Rs.{self.balance} is returned to you via Cheque')
+		print(f'Dear {self.accHolderName}, your account is deleted')
+		self.accNum = -1  #mean to say Account is deleted
+
+	def displayAccountDetails(self):
+		print('Your Account details are: ')
+		print(f'Name:{self.accHolderName}, Balance:{self.balance}, AccountType:{self.accType}')
+
+class AccountDemo:
+
+	def __init__(self):
+		self.accounts = [] #To store the BankAccount objects
+
+	def exitProgram(self):
+		sys.exit("System Exiting")
+
+class AccountDemo:
+
+	def createMenu(self):
+		menu = {
+			1 : self.createAccount,
+			2 : self.deleteAccount,
+			3 : self.displayAccount
+		}
+		return menu
+
+	def __init__(self):
+		self.accounts = [] #To store the BankAccount objects
+		self.accountNum = 1000 #The starting account number
+
+	def invalidChoice(self):
+		print('Invalid Choice enetered')
+
+	def createAccount(self):
+		acc = BankAccount()
+		self.accountNum += 1
+		acc.accNum = self.accountNum #set the AccNum for the new Account created
+		acc.createAccount()
+		self.accounts.append(acc)
+
+	def deleteAccount(self):
+		if len(self.accounts) == 0:
+			print('There are no Accounts created yet')
+			return
+		accNum = int(input('Enter Account number to delete the account: '))
+		j = -1
+		for i in range(len(self.accounts)):
+			if self.accounts[i].accNum == accNum:
+				self.accounts[i].deleteAccount()
+				j = i
+				break
+		if j != -1:
+			del self.accounts[j]
+		else:
+			print(f'Account with Acc-Number:{accNum} not found')
+
+	def displayAccount(self):
+		if len(self.accounts) == 0:
+			print('There are no Accounts created yet')
+			return
+		accNum = int(input('Enter Acc-Number to print details: '))
+		accountFound = False
+		for account in self.accounts:
+			if account.accNum == accNum:
+				account.displayAccountDetails()
+				accountFound = True
+				break
+		if not accountFound:
+			print(f'Account with Acc-Number:{accNum} not found')
+
+	def runMenu(self):
+		menu = self.createMenu()
+		while True:
+			print('1:CreateAccount 2:DeleteAccount 3:DisplayAccount 4:Exit')
+			choice = int(input('Your choice please: '))
+			if choice == 4:
+				return
+			else:
+				menu.get(choice, self.invalidChoice)()
+
+print('Welcome to SBI Online Banking')
+userObject = AccountDemo()
+userObject.runMenu()
+print('Thank you for using our services')
+---------------------------------------------------------
+# pickling.py
+import pickle
+
+class example_class:
+    a_number = 35
+    a_string = "hey"
+    a_list = [1, 2, 3]
+    a_dict = {"first": "a", "second": 2, "third": [1, 2, 3]}
+    a_tuple = (22, 23)
+
+my_object = example_class()
+
+my_pickled_object = pickle.dumps(my_object)  # Pickling the object
+print(f"This is my pickled object:\n{my_pickled_object}\n")
+
+my_object.a_dict = None
+
+my_unpickled_object = pickle.loads(my_pickled_object)  # Unpickling the object
+print(
+    f"This is a_dict of the unpickled object:\n{my_unpickled_object.a_dict}\n")
+---------------------------------------------------------------------------
+import pickle
+  
+# Create a variable
+myvar = [{'This': 'is', 'Example': 1}, 'of',
+         'serialisation', ['using', 'pickle']]
+  
+# Use dumps() to make it serialized
+serialized = pickle.dumps(myvar)
+  
+print(serialized)
+-------------------------------------------------------------------------
+import pickle
+  
+# Create a variable
+myvar = [{'This': 'is', 'Example': 2}, 'of',
+         'serialisation', ['using', 'pickle']]
+  
+# Open a file and use dump()
+with open('file.pkl', 'wb') as file:
+      
+    # A new file will be created
+    pickle.dump(myvar, file)
+----------------------------------------------------------
+import pickle
+  
+# Open the file in binary mode
+with open('file.pkl', 'rb') as file:
+      
+    # Call load method to deserialze
+    myvar = pickle.load(file)
+  
+    print(myvar)
+----------------------------------------------------------------
+>>> square = lambda x : x * x
+>>> a = square(35)
+>>> import math
+>>> b = math.sqrt(484)
+>>> import dill
+>>> dill.dump_session('test.pkl')
+>>> exit()
+------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+The zeros() method creates a list of lists of given dimension, and all the lists will have all its elements Zeroes.
+arrays = np.zeros((3, 4))
+print(arrays)
+
+for array in arrays:
+	print(array)
+
+arrays = np.zeros((1, 4))
+print(arrays)
+
+ones() method works in line with zeros()
+arrays = np.ones((3, 4))
+print(arrays)
+
+for array in arrays:
+	print(array)
+
+arrays = np.ones((1, 4))
+print(arrays)
+-----------------------------
+# Initializing a numpy Array using elements with in a range:
+# arange()
+
+array = np.arange(10, 30)
+#Creates a List of elements between [10, 30) with an implicit increment of 1 between  the consecutives elements of the array.
+print(array)
+print(type(array))
+print(array[2]) # 12
+------------------------
+array = np.random.randint(1, 50, 3)
+# Creates an numpy array of 3 elements between the range given
+print(array)
+
+array = np.random.randint(1, 3, 3)
+# The range considered is [1, 3)
+# It generates 'n' number of elements which is provided as 3rd argument
+# Duplicate elements may be generated
+# The generated elements need not be in order
+# Creates a single list of integers
+print(array)
+
+array = np.random.randint(1, 100, 15)
+print(array)
+array2 = sorted(array)
+print(array2)
+------------------------------
+import numpy as np
+
+array1 = np.array([1, 3, 5, 0, 2, 3, 4, 5, 13, 17, 23, 29])
+print(array1.shape)
+print(array1)
+
+#array1.shape = (4, 2) # Error New shape of the array must consist of same number of elements as that of original array
+#print(array1.shape)
+#print(array1)
+
+array1.shape = (6, 2)
+print(array1.shape)
+print(array1)
+
+array1.shape = (3, 4)
+print(array1.shape)
+print(array1)
+
+array1.shape = (4, 3)
+print(array1.shape)
+print(array1)
+------------------------
+a1 = np.array([22, 42, 6, 81])
+a2 = np.array([30, 91, 7, 51])
+a3 = np.array([0, 10, 23, 32])
+
+# vstack()  V means Verticle. This is to place one array upon another
+# vstack() takes one Arg. Thus the arrays we pass must be placed inside paranthesis
+# The number of elements in all the arrays must be same
+# vstack() can Stack multiple arrays
+
+print(np.vstack((a1, a2, a3))) # place a1 on a2 and a2 on a3
+print('\n')
+print(np.vstack((a3, a1, a2, a1)))
+-------------------------------------
+a1 = np.array([2, 4])
+a2 = np.array([300, 9119, 7, 5])
+a3 = np.array([0, 101, 323])
+
+# hstack() 'h' stands for horizontal
+# Unlike vstack, hstack() can stack arrays of different sizes.
+print(np.hstack((a1, a2)))
+
+print(np.hstack((a1, a2, a3)))
+---------------------------------
+a1 = np.array([2, 4, 9])
+a2 = np.array([300, 7, 5])
+a3 = np.array([0, 101, 323])
+
+# column_stack() 
+# The elements from the numpy arrays, column wise are taken and a row is created.
+#Note that the number of elements in the i/p arrays must be same.
+print(np.column_stack((a1, a2)))
+
+print(np.column_stack((a1, a2, a3)))
+-------------------------------------
+a1 = np.array([4, 9, 11, 19, 27, 31, 38, 48, 63, 85, 89, 95, 105, 119])
+
+print(np.mean(a1))
+# mean is nothing but Average, which is the quotient of sum of the elements of the array divided by number of elements in the array.
+print(type(np.mean(a1)))
+
+print(np.median(a1))
+# Meadian is the middle element of the sorted list/array of the original array.
+# If Even number of elements is present in the array, then the 2 mid elements are added and their average is the median.
+
+# The mean() and Median() always returns float64 (double) type value.
+
+# A standard deviation (or σ) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out.
+# a quantity expressing by how much the members of a group differ from the mean value for the group
+#
+
+sigma = population standard deviation
+N	  =	the size of the population
+ele   =	each value from the population
+mu	  =	the population mean  (avg)
+
+sq_root(sum(square(every_ele - mu)) / N)
+
+a2 = np.array([300, 400, 350, 279, 480, 370])
+print(np.std(a2))
+
+a3 = np.array([180, 182, 185, 181, 182, 178])
+print(np.std(a3))
+
+a4 = np.array([165, 166, 165.7, 165.2, 166.15, 166.5])
+print(np.std(a4))
+-----------------------------------------------
+a1 = np.array([2, 4, 9, 19, 7, 11])
+
+a2 = np.array([23, 4, 9, 15, 11, 20])
+# Intersection of 2 arrays (set of values)
+
+a3 = np.array([[2, 4, 6, 7, 9, 8], [12, 21, 20, 15, 18]])
+a4 = np.array([[3, 4, 9, 4, 1, 8], [12, 22, 21, 17, 13]])
+
+a5 = np.array([[2, 4, 6], [7, 9, 8], [12, 21, 20], [15, 18, 20]])
+a6 = np.array([[3, 4, 9], [2, 4, 6], [12, 21, 20], [17, 13, 20]])
+
+a7 = np.array([[2, 4, 6], [7, 9, 8], [12, 21, 20], [15, 18, 20], [1, 2, 3]])
+a8 = np.array([[3, 4, 9], [2, 4, 6], [12, 21, 20], [17, 13, 20], [1, 2, 3]])
+
+#print(np.intersect1d(a1, a2))
+print(np.intersect1d(a3, a4))
+print(np.intersect1d(a5, a6))
+print(np.intersect1d(a7, a8))
+
+#for i in range(len(a3)):
+#	print(np.intersect1d(a3[i], a4[i]))
+
+# The intersect1d() returns an ORDERED SET (list or array of UNIQUE elements of 1 dimention only)
+# Even if we are intersecting arrays of 2D, the intersect1d() returns a 1D list of intersecting unique elements.
+# The list of intersecting unique elements returned by intersect1d() is always ordered.
+# If there are no common elements between the i/p lists, then intersect1d() returns an empty list
+-------------------------------
+import numpy as np
+
+mysore_stores = ['tata', 'patanjali', 'itc', 'dabur', 'metro', 'reliance']
+neeraja_visited = (['itc', 'itc,', 'dabur', 'dabur', 'itc', 'patanjali', 'metro', 'patanjali', 'metro', 'ajay_stores'])
+
+x = 0
+visited_stores = np.zeros((1, len( mysore_stores )))
+
+for i in range(len(neeraja_visited)):
+	if neeraja_visited[i] in mysore_stores:
+		index = mysore_stores.index(neeraja_visited[i])
+		if index != -1:
+            visited_stores[0][index] = 1
+
+for element in visited_stores[0]:
+	if element == 1:
+		x += 1
+
+print(f'Number of stores visited by Neeraja is {x}')
+---------------------------------------
+a1 = np.array([2, 4, 9, 19, 7, 11])
+a2 = np.array([2, 14, 9, 29, 72, 111])
+
+print(np.setdiff1d(a1, a2)) # 4, 9, 7, 11
+# a1 - a2, i.e. prints the elements which are in a1 but not in a2
+
+print(np.setdiff1d(a2, a1)) # 14, 29, 72, 111
+# a2 - a1, i.e. prints the elements which are in a2 but not in a1
+---------------------------------------------------
+# Numpy arrays as Matrices
+print(a1[0]) # To print the 1st row in the Matrix
+print(a2[1])
+
+print(a1[:, 1]) # To print 2nd Column in the matrix
+print(a2[:, 2]) # # To print 3rd Column in the matrix
+----------------------------------------------------
+# Arithmetic operations on Numpy Arrays
+
+a3 = np.array([2, 4, 6, 8])
+a4 = np.array([1, 3, 5, 7])
+a5 = a3 + a4
+a7 = a3 - a4
+a6 = a4 - 3
+a3 = a3 + 1
+a4 = a4 + 2
+a8 = a3 * 3
+print('A8 = ', a8)
+print('A6 = ', a6)
+print('A7 = ', a7)
+print('A3 = ', a3)
+print('A4 = ', a4)
+print('A5 = ', a5)
+
+l1 = [2, 4, 5]
+print('\n', l1 * 3)
+a5 = a3 / 4
+print(a5) # prints the quotient with precision
+---------------------------------------------------------
+import csv
+import numpy as np
+
+data = [] # Normal or ordinary list
+
+with open('data1.csv', 'r') as csvfile:
+    file_reader = csv.reader(csvfile, delimiter = ',')
+    for row in file_reader:
+        data.append(row)
+
+npdata = np.array(data)  # convert the ordinary list of lists to a NumPy array which is 1D
+
+print(len(npdata), '\n', type(npdata))
+print('Shape: ', npdata.shape)
+print('Datatype: ', npdata.dtype.type)
+np.save(open('data2.npy', 'wb'), npdata) #We are saving the np array into a file with extension .npy
+
+for element in data:
+    print(element)
+----------------------------------------------------------
+import numpy as np
+
+list1 = [
+    [ int(x) for x in range(1, 20, 2) ],
+    [ int(x) for x in range(20, 40, 2) ],
+    [ int(x) for x in range(41, 60, 2) ],
+    [ int(x) for x in range(60, 80, 2) ]
+]
+
+np_array = np.array(list1)
+
+for array in np_array:
+    print(array)
+
+print('Length: ', len(np_array))
+print('Type: ', type(np_array))
+print('Shape: ', np_array.shape)
+print('Datatype: ', np_array.dtype.type)
+print('Size: ', np_array.size)
+----------------------------------------------------------
+
+----------------------------------------------------------------
+import numpy as np
+
+list1 = [
+    [ int(x) for x in range(1, 20, 2) ],
+    [ int(x) for x in range(20, 40, 2) ],
+    [ int(x) for x in range(41, 60, 2) ],
+    [ int(x) for x in range(60, 80, 2) ]
+]
+
+np_array = np.array(list1)
+for array in np_array:
+    print(array)
+
+print('np_array[1, 2:4]: ', np_array[1, 2:4]) # 2nd row 3rd and 4th elements
+print('np_array[:, 1]: ', np_array[:, 1]) # All the rows, 2nd column elements
+print('np_array[2:, 2:]: ', np_array[2:, 2:]) # From 3rd row till last row, in each row, print from 3rd
+# column till last. Hence, you should get 2D Array
+print('np_array[1::2, ::2] \n', np_array[1::2, ::2]) # In 2nd Row, alternate elements and in Last row
+# alternate elements
+print('np_array[0:10, 4]', np_array[0:10, 4]) # From rows indexed 0 to 9, print all the elements in 
+# column index 4
+print('np_array[:,4]', np_array[:,4]) # All rows, 5th column elements
+
+print('np_array[:,2:4] \n', np_array[:,2:4]) # From all rows, consider elements from column indexed 2 to 3
+# Thus we get 2D numpy Array
+
+subset = np_array[1:6, [2, 3, 7]] #Start from 2nd row till 6th row and print the elements in
+# column indices 2, 3 and 7
+
+print('Subset:\n', subset)
+-----------------------------------------------------------
+Attributes of an Array
+The reshape() Method
+The flatten() Method
+Working with Arrays using numpy
+Creating Arrays using array()
+Creating Arrays using linspace
+Creating Arrays using logspace
+Creating Arrays using arange() Function
+Creating Arrays using zeros() and ones() Functions
+Mathematical Operations on Arrays
+Comparing Arrays
+-------------------
+The assert Statement
+The Global Keyword
+Anonymous Functions or Lambdas
+Function Decorators
+Generators
+Creating our Own Modules in Python
+-------------------------------------------------------
+DAY6 TUESDAY 25-10-2022
+MULTI THREADING (CONCURRENT PROGRAMMING)
+
+When ever we run a program, A method/function is called.
+And this method is always run as a process by the OS.
+
+Thus for a process, we need to assign the required resources. And this is managed by a Process_ID
+The resources will be the memory (allocated) and other resources like I/O devices, disk, buffers etc.
+
+Thus a process has its own resources and this is not SHARED with any other processes.
+
+However, in many a cases, running only one process at a time would not effective. Because the computer may have more capability, i.e. to run more processes SIMULTANEOUSLY.
+
+Hence, we can create something calles as THREADS.
+Threads are processes in side a process.
+Thus Threads share memory and resources.
+Thus we have SHARED MEMORY CONCEPT.
+Since Threads share memory of a single process, we can say Threads are LIGHT WEIGHT PROCESSES.
+
+Now we can run these threads simultaneously where as running processes themselves CONCURRENTLY would have captured a lot of computer resources. Since, the threads run inside a single process, they share memory rather than claiming their own resources.
+
+Thus we are trying to use the resources more effectively and also efficiently.
+
+Thats not the only benefit. We can implement applications that are real life.
+
+Examples:
+1. The gmail application. When we are tying a mail content, Observe that the following programs are running within the application concurrently:
+	1. text editor
+	2. spell check
+	3. Auto save
+Here What you to observe is that all the 3 programs run independently. All 3 programs can run simultaneaouly. If one program is running, it doesnt affect or stop the other.
+
+2. Subway Surfers Game
+	1. The background music is playing.
+	2. The sounds for various actions in the game (collecting the coins, jumping on the train, police catching the boy etc.)
+	3. The program that stores and manages the points in the game.
+	4. The video player in the game.
+
+WORKING OF MULTI-THREADING:
+In the case of multi-threading, multiple methods run together.
+However, the method which runs 1st, has the responsibility create the child threads.
+Thus the method that creates new threads can be called as Parent thread.
+
+In normal programs, function A() calls B(). Then A() is put on hold and B() starts running.
+However, in Concurrency Control (Multi-Threading), A() puts the B() inside a thread and runs it (calls it). Thus, now, both A() and B() are running together.
+A() here is parent and B() is child.
+-----------------------------------------------
+IMPLEMENTATION OF MULTI-THREADING IN Python:
+
+The module we need to import to use Multi-Threading in Python is "threading"
+
+BELOW ARE THE METHODS WHICH WE CAN CALL EXPLICITLY:
+
+Methods from the "threading" module:
+
+active_count()
+It returns number of Thread objects currently alive.
+This count is actually the length of the list returned by the method named enumarate()
+Also note that threading is implemented in Python using OOP.
+Hence, Thread is a class.
+
+activeCount() is also similar to active_count(), but later is the one in use and the prior one is depricated.
+
+current_thread()
+It returns the current Thread object.
+Depricated method: currentThread()
+
+excepthook(args)
+This is related with exception handling for threading
+
+The args which this method receive are:
+1. exc_type:  That is, the exception type
+2. exc_value: That is, the exception value (It can be None)
+3. exc_traceback: Exception traceback, (Can be None)
+It is used to find the possible reasons for the exception that occured.
+4. thread: Thread that raised (thrown: Java terminology) the exception
+
+excepthook() can be overridden to handle the exception raised by Thread.run()
+
+__excepthook__
+This is to hold the original value of excepthook()
+
+get_ident()
+It returns the "thread identifier" of the current thread. It is a non zero interger number which is usually an index of a dictionary where thread ralated data is saved.
+However, these data may be recycled as and when old threads are deleted and new ones are created.
+
+get_native_id()
+Note that, on our system multiple applications may be running and many of them may have several threads running.
+However, to get the ID (unique non negative integer) which is SYSTEM WIDE.
+
+enumarate()
+It returns a list of all Thread objects that are currently alive and active.
+This list includes all the threads created by current_thread() including the dummy threads.
+
+main_thread()
+Usually the Thread Object from which the Python interpreter was started.
+
+settrace(func)
+It is to set a trace for all threads started from the threading module.
+The "func" will be passed to sys.settrace() for each thread before the run() is called.
+
+gettrace()
+This is to get the trace function set by the settrace()
+
+setprofile(func)
+getprofile()
+
+stack_size([size])
+It returns the thread stack size used when creating new threads.
+-------------------------------------------
+BELOW ARE THE METHODS THAT ARE CALLED IMPLICITLY:
+local()
+This is to specify the THREAD LOCAL DATA whose values are thread specific.
+To achieve this, we need to create an instance of LOCAL or a subclass.
+
+CREATING THREAD OBJECTS:
+There are 2 ways of creeating thread objects:
+1. By passing a callable object to the constructor
+2. By over-riding the run()
+
+i.e. to over-ride __init__ and run()
+
+Note that run() is implicitly called by the start()
+Thus, once we create a thread, to run it, we must call start() which inturn calls run()
+
+start()
+It is to start the thread activity.
+It puts the thread inside the process and is responsible to call the run()
+start() can be called only one per thread object.
+It raises RuntimeError if it is called more than once.
+
+run()
+It directly represents the activity(ies) of a thread. i.e., it simply runs the method which we intend to work/run as a thread.
+run() invokes the callable object passed to the object's constructor.
+-----------------------------------------
+import threading
+import logging
+import time
+
+def thread_function(arg): # Child thread
+	logging.info(f'Thread {arg} started')
+	time.sleep(2) # 2 seconds of delay
+	logging.info(f'Thread {arg} finished')
+
+# main method (global section):
+if __name__ == "__main__":
+	my_format = "%(asctime)s: %(message)s"
+	logging.basicConfig(format=my_format, level=logging.INFO, datefmt="%H:%M:%S")
+
+logging.info('In the main() before creating the Thread')
+t1 = threading.Thread(target=thread_function, args=(1,))
+logging.info('In the main() before running the Thread')
+t1.start()
+logging.info('In the main() after running the Thread')
+
+logging.info('In the main() after thread is called and finished')
+#Note that, when the above call is made, we are not sure if the child thread (t1: thread_function) has completed.
+
+Here We are craeting 2 function.
+1. main function (The code in global scope)
+2. thread_function
+
+We are creating a thread for thread_function in the __main__ and thus __main__ is the parent thread and thread_function is the child thread.
+
+Sometimes, the __main__ finishes before the child thread. This is because its life is shorter, in other words, it has lesser/fewer number of instructions to run as compared with the __main__ thread.
+
+Then theprogram may end before the child thread to could complete.
+Hence the parent thread can ask to wait until the child thread completes.
+
+join()
+Wait until the thread terminates.
+It is used to ask the main or the parent thread to wait until the child thread completes.
+This is done by blocking the calling thread (parent)until the child thread (thread whose join() is called, terminates either normally or with an exception) completes.
+
+Note: A thread can be join()ed many times. Because multiple other threads may be invoking this thread.
+join() raises RuntimeError if an attempt is made to join() the current thread (itself: Recursive), because this would create DEADLOCK.
+
+DEADLOCK SITUATION: It is a situation where, the multi-threaded program cannot continue from the current execution state of the program.
+----------------------------------------
+Thread constructor
+
+Thread(group=None, target=None, name=None, args(), kwargs={}, *, daemon=None)
+
+group: It is used only when we implement(create and use) ThreadGroup class.
+target: It is the callable object to be invoked by the run()
+None if nothing is called
+name: It is the thread name that we wish to specify. It is also automatically generated in the form: 'Thread-N' where N is a decimal number, that usually starts with 1.
+The name can also be 'Thread-N(target)' if the target argument is specified.
+
+args: It is the argument tuple for the target invocation. It is empty by default.
+
+kwargs: It is a dictionary of keyword args for the target invocation. It is by default empty.
+
+Note: If the sub class over-rides the constructor, then it must invoke the base class constructor.
+
+daemon: It explicitly specifies/sets if the thread is daemonic. It is by default None, that means, it inherits the daemonic property from the current thread.
+
+
+NOTE: The order of execution in which the different threads which are created cannot be determined.
+The threads run on their own by default it's execution cannot be controlled.
+----------------------------------------
+import threading
+import logging
+import time
+
+import time
+# import threading
+from threading import Thread
+
+def thread_func(num):
+	for i in range(10):
+		time.sleep(0.25)
+		print(f'From child Thread-{num}')
+
+#main
+for i  in range(10):
+	t = Thread(target=thread_func, args=(i,)) #creating a thread
+	t.start() # run the thread
+	print(f'From main thread-{i}')
+	time.sleep(0.25)
+t.join() # main/parent thread waits until child thread completes.
+-----------------------------------------
+import threading
+import logging
+import time
+
+import time
+# import threading
+from threading import Thread
+
+def findSquare(num):
+	print('Square of {} is {}'.format(num, num * num))
+
+def findCube(num):
+	print('Cube of {} is {}'.format(num, num * num * num))
+
+# main
+if __name__ == "__main__":
+	thread1 = threading.Thread(target=findSquare, args=(15,))
+	thread2 = threading.Thread(target=findCube, args=(7,)) # thread2 is created
+
+	thread1.start() # thread1 starts executing
+	thread2.start()
+	print('All Threads completed')
+	thread1.join() # main waits till thread1 completes
+	thread2.join() 
+	print('All Threads completed')
+-------------------------------------------------------
+To set name for the threads while creating.
+To change/set name for a thread after creating.
+To print the processID of diffrent threads.
+To print/get the name of the threads created.
+-----------------------------------------------
+import threading
+import time
+
+def function1():
+	print('Thread started')
+	time.sleep(1)
+	print('Thread completed')
+
+# Main
+start_time = time.perf_counter() # starts the counter
+
+function1()
+function1()
+
+end_time = time.perf_counter() # stops the counter
+
+print('Time taken to run the 2 different calls is', (end_time-start_time), 'seconds')
+-------------------------------------------
+import threading
+import time
+
+def function1():
+	print('Thread started')
+	time.sleep(1)
+	print('Thread completed')
+
+# Main
+start_time = time.perf_counter() # starts the counter
+
+thread1 = threading.Thread(target=function1)
+thread2 = threading.Thread(target=function1)
+
+thread1.start()
+thread2.start()
+thread1.join()
+thread2.join()
+
+end_time = time.perf_counter() # stops the counter
+
+print('Time taken to run the 2 different calls is', (end_time-start_time), 'seconds')
+-------------------------------------
+Daemon Threads: The threads that run in the backgroud.
+No need of explicitly ending/shutting the threads down.
+It automatically ends as the program ends.
+Thus these threads once run, they need not be maintained or focused on.
+-------------------------------------------------------
+import threading
+import time
+
+def function1(num):
+	print('Thread started')
+	for i in range(num):
+		time.sleep(0.3)
+	print('Thread completed')
+
+# Main
+start_time = time.perf_counter() # starts the counter
+
+thread1 = threading.Thread(target=function1, args=(5,), daemon=True)
+
+thread1.start()
+
+end_time = time.perf_counter() # stops the counter
+
+print('Time taken to run the 2 different calls is', (end_time-start_time), 'seconds')
+------------------------------------------------
+Creating Multiple Threads:
+
+import logging
+import threading
+import time
+
+def function1(var):
+	logging.info('Thread %s: started', var)
+	time.sleep(0.5)
+	logging.info('Thread %s: finished', var)
+
+# Main
+if __name__ == "__main__":
+	formatStr = "%(asctime)s: %(message)s"
+	logging.basicConfig(format = formatStr, level=logging.INFO, datefmt = "%H:%M:%S")
+
+	threads = []
+	for i in range(5):
+		logging.info(f"From Main, Thread {i} started!")
+		thread1 = threading.Thread(target=function1, args=(i,))
+		threads.append(thread1)
+		thread1.start()
+
+	for i, thread in enumerate(threads):
+		logging.info(f"From Main: Before joining thread {i}")
+		thread.join()
+		logging.info(f'From Main: After thread {i} is completed')
+----------------------------------------------------------
+import os
+  
+userDrive = input("Which drive you wish to open ? C or D or E: ")
+
+if "C" in userDrive.upper():
+  os.startfile("C:")
+    
+elif "D" in userDrive.upper():
+  os.startfile("D:")
+  
+elif "E" in userDrive.upper():
+  os.startfile("E:")
+  
+else:
+    print("Wrong Input")
+-----------------------------------------
+class Employee:
+    def __init__(self,empid,empname,sal):
+        self.empid = empid 
+        self.empname = empname 
+        self.sal = sal 
+    def __str__(self):		#to make object printable
+        return  ('[%d %s %f]'%(self.empid, self.empname, self.sal))
+    
+    def __repr__(self):		#to make object printable
+        return  ('[%d %s %f]'%(self.empid, self.empname, self.sal))
+
+    def __lt__(self,another):
+        return self.sal < another.sal
+    
+    def __add__(self,another):
+        res = Employee(103,self.empname + another.empname,self.sal + another.sal)
+        return res
+    
+emp1 = Employee(100, 'nithin', 90000.0)           
+print(emp1) # call to __str__
+emp2 = Employee(101,'mahesh',80000.0)          
+lst = [emp1, emp2] # creating a list of Employee objects
+print(lst) # __repr__
+lst.sort() # We can sort the list which in turn calls __lt__
+print(lst)
+emp3 = emp1 + emp2 # calls __add__
+print(emp3) # calls __str__
+-----------------------------------------------------
+# OS Module
+
+import os
+# To print/know the present working directory/folder (PWD)
+print(os.getcwd())
+
+#Change directory/folder
+# changes are applied temporarily. i.e. for the current program execution only.
+os.chdir('d:/desktop')
+print(os.getcwd())
+os.system('mkdrir tempfolder')
+-----------------------------------------------
+# OS Module
+import os
+
+print(os.getcwd()) # Prints the PWD
+
+os.chdir('d:/desktop') # changes the PWD to what we have specified
+print(os.getcwd()) # Prints the PWD (Notice the change)
+os.system('mkdir tempfolder') # creates a new folder in the PWD
+os.startfile(os.getcwd()) # Opens the folder system with PWD
+--------------------------------------------
+print(dir(os))
+#This returns the list of all the OS modules(programs)
+
+print(help(os))
+# Lists all the help menu of the OS on/of our system
+--------------------------------------------------
+# to get the name of our OS
+print(os.name) 
+
+os.chdir('d:/desktop') # change current working folder
+print(os.getcwd()) # prints the PWD
+os.system('mkdir tempfolder') # creates the new folder in PWD
+----------------------------------------------
+os.rmdir('d:/desktop/tempfolder')
+os.startfile('d:/desktop') # To permanently delete a folder (empty folder only)
+----------------------------------------------
+import shutil
+import os
+
+shutil.rmtree('d://desktop//tempfolder') # To delete the folder along with its sub-tree ( sub folders and their folders and all files in the path)
+os.startfile('d:\desktop') # opens the folder system from the given path as the pwd
+---------------------------------------------------
+import os
+
+# to list all the files from PWD
+print(os.listdir())
+
+# to list all the files from specified folder
+print(os.listdir('D:\Downloads'))
+-------------------------------------------
+# To print the file and folder names one by one from the returned list by listdir()
+
+import os
+for eachFileOrFolder in os.listdir(myPath):
+	print(eachFileOrFolder)
+----------------------------------------------
+from os import listdir
+from os.path import isfile, join
+
+# To list only the files and not folders from a given path:
+myPath = 'D:\Downloads'
+
+listOfFiles = [eachFile for eachFile in listdir(myPath) if isfile(join(myPath, eachFile))]
+
+for eachFile in listOfFiles:
+	print(eachFile)
+-----------------------------------------------
+from os import listdir
+from os.path import isfile, join
+import time
+
+def getFilesFromFolder(folderName):
+	listOfFiles = [eachFile for eachFile in listdir(folderName) if isfile(join(folderName, eachFile))]
+	return listOfFiles
+
+# Gloabl/Main Code:
+# To list only the files and not folders from a given path:
+
+myPath1 = 'D:\Downloads'
+myPath2 = 'D:\Pictures\whatsAppImages'
+
+startTime = time.perf_counter() # starts the counter
+
+listofFiles = []
+listofFiles = getFilesFromFolder(myPath1)
+for eachFile in listofFiles:
+	print(eachFile)
+
+listofFiles = getFilesFromFolder(myPath2)
+for eachFile in listofFiles:
+	print(eachFile)
+
+endTime = time.perf_counter() # ends the counter
+
+print('Time taken to get files from 2 folders is ', (endTime-startTime), 'seconds')
+----------------------------------------------------------
+import os
+import time
+from threading import Thread
+
+def getFilesFromFolder(folderName):
+	listOfFiles = []
+	listOfFiles = os.listdir(folderName)
+	
+	for eachFile in listOfFiles:
+		print(folderName + '\\' + str(eachFile))
+
+# Gloabl/Main Code:
+
+myPath1 = 'H:\\Photos\\Rajasthan Trip Feb 2021 Nithin Mobile'
+myPath2 = 'H:\\Photos\\ManiMahesh And SachPass June 2022\\Nithin Mobile'
+listofFiles1 = []
+listofFiles2 = []
+
+t1 = Thread(target=getFilesFromFolder, args=(myPath1,))
+t2 = Thread(target=getFilesFromFolder, args=(myPath2,))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print('Time taken to get files from 2 folders is ', time.time(), 'seconds')
+--------------------------------------------------------------
+ASSIGNEMENTS:
+1. What are RACE conditions?
+2. Overview of multi-threading (Theory)
+3. Multi-Threading in Python (Implementation)
+4. DeadLock and Synchronization using Lock
+---------------------------------------
+1. Read all the files from a folder (done)
+2. Search for a file in a folder
+3. Search for all occurances of a file in a path (Print all the locations)
+4. Search for a file1 in path1 and file2 in path2
+5. Implement (4) using multi threading
+6. 2.3 in the case study
+7. SOLID principles
+8. Implement (4), (5) and (6) using OOP
+9. Implement (6) using Design Patterns (Factory and interface)
+10. Apply Exception handling to (10)
+11. 
+------------------------------------------------------
+SOLID PRINCIPLES:
+1. Single Responsibility Principle (High Cohesion)
+A class/function/instruction/statements should have only a single responsibility, i.e., it should solve only one problem. Thus within the software, only one change in the s/w specification should apply.
+
+2. Open/Closed Principle:
+A program/Application/code should be Open for extension but closed for modification.
+i.e., When ever, we implement a solution, it must be comprehensive/complete with the client requirements.
+
+3. Liskov Substitution Principle:
+Objects in a program should be replaacable with the instances of their subtypes without altering the correctness of that program.
+
+def function(reference):
+	pass
+	
+If this function has to accept/receive objects of both super and sub types, then the reference must be of type super/parent.
+
+4. Interface Segregation Principle:
+Clients must not be forced to depend upon the interfaces they use and they do not use.
+
+Many client-specific interfaces are better than one general-purpose interface.
+
+5. Dependency Inversion Principle:
+Program to an interface, not to an implentation.
+
+----------------------------------------------------
+os.walk()
+It generates the filenames and folder names in a folder tree by WALKING(traversing) the tree top-down or bottom-up.
+For every folder, it returns/yields a 3-tuple(dirpath, dirnames, filenames)
+root: Prints the folders only from what we specify
+dirs: Prints out sub-folders from the root
+files: Prints all files from the root and sub-folders
+
+if __name__ == "__main__":
+	for(root, dirs, files) in os.walk('java', topdown=True):
+		print(root)
+		print(dirs)
+		print(files, '\n')
+-----------------------------------------------------
+The below program, takes a path and prints the sub folder and file names recursively top-down
+
+import os
+from os import walk
+
+if __name__ == "__main__":
+	for(root, dirs, files) in os.walk('D:\Downloads', topdown=True):
+		print(root)
+		print(dirs)
+		print(files, '\n')
+---------------------------------------------------------------
+# Searching for a file in a path recursively:
+import os
+from os import walk
+
+# Driver Code
+def find_file(path, filename):
+	paths = []  #All the paths where the file is found will be stored in this list
+
+	# Walk through the path Top_down
+	for root, dir, files in os.walk(path):
+		if filename in files: # For every file in the list of files in each folder
+			paths.append(os.path.join(root))
+			# paths.append(os.path.join(root, filename))
+
+	return paths
+
+# Main/User Code
+print(find_file('D:\Documents', 'demat.doc'))
+# We want to search for the file "demat.doc" in the path "D:\documents" recursively (in all sub folders also)
+--------------------------------------------------------------
+# Recursively printing the folder, its sub folders and their files
+import os
+from os import walk
+
+printed1 = True
+for root in os.walk('D:\Documents\Invoices'):
+	if printed1:
+		print(root)
+		printed1 = False
+		continue
+	printed2 = True
+	for dir in root:
+		if printed2:
+			print(dir)
+			printed2 = False
+			continue
+		for files in dir:
+				print(files)
+--------------------------------------------------------
+list1 = [2, 4, 5, 8]
+tuple1 = ('a', 'h', 'l', 'c')
+s1 = 'hcl Vijayawada'
+
+if type(list1) == list:
+	print('list1 is a list')
+
+if type(tuple1) == tuple:
+	print('tuple1 is a tuple1')
+
+if type(s1) == str:
+	print('s1 is a string')
+---------------------------------------------------------------
+EXCEPTION HANDLING:
+When a error occurs at runtime, it is called as an Exception.
+Thus exception is the error which cannot be found by the compiler.
+Exception = RunTimeError
+
+When an exception occurs, the normal flow of code cannot be continued.
+Thus, the Python Interpreter stops the execution and THROWS the respective exception created.
+
+We say an Exception occured, which means in the code, the present instruction is trying to do something which is impossible.
+e.g:
+1. Trying to access 5th element in the list which has 4 elements.
+2. Trying to store the quotient of a division where the divider is zero.
+3. Trying to connect to the DB which is switched off.
+4. Trying to open a file for reading which doesn't exist.
+
+When an exception occurs, an object of a respective Exception class is created and it is thrown.
+
+Now, if nobody CATCH this exception object, then the interpreter stops the program execution by displaying the exception class.
+
+HANDLING AN EXCEPTION:
+Stopping the program execution abtruptly creates havoc with the user.
+Hence we need a mechanism where we can HANDLE the exception within the code and give the possible solution when an exception occurs.
+
+IMPLEMENTATION OF EXCEPTION HANDLING:
+The code where we SUSPECT that exception may occur must be put into "try" block
+And the solution(s) for the exception if occurs must be put into "except" blocks(s).
+Note that the try-except blocks are defined inside a method/function.
+
+WHEN EXCEPTION DOESN'T OCCUR:
+When exception doesn't occur, all the statements of the "try" block runs and all the "except" blocks are skipped and the "finally" block statements are run (if present) and lastly the statements at the end of the function (after the except and finally blocks) are run (if present).
+
+WHEN EXCEPTION OCCURS:
+The statement inside the try block which creates the exception is not SUCCESSFULLY run. Hence, the control comes out of the try block, thus skipping the remaining statements inside the try block and an object of a respective exception class is created and it is thrown.
+Now this object is matched one by one with the except blocks in the order they are defined (similar to switch-case matching).
+
+If none of the except blocks match with the exception object, then the interpreter will stop the program execution and displays the exception type.
+
+Note that the exception object created in the try block can be received by a super-class type (exception class type reference).
+** Hence the except blocks types if are is-a related (inheritance), then the sub type except block must be defined before the super type except blocks (i.e., in the reverse order of derivation)
+
+Note: It is always safe to define the parent-most except block, i.e., of the type Exception.
+
+Note:
+1. Inside the except blocks, we can again define try-except blocks.
+2. We can define a try block inside a try block (nesting). Advantage of doing so is that, if none of the except blocks of inner try matches the exception object, then the matching is continued with the except blocks of the outer try.
+3. A try block must have at least one except block.
+4. There cannot be any statements inbetween the try and except blocks.
+5. except block(s) cannot exist without a try
+** 6. finally block is optional. But if present, it runs irrespective of whether the exception occured or not.
+7. Only one finally block can be defined for each try block.
+8. The inner/nested except and finally blocks of the nested try block runs only if the control goes to the inner/nested try block.
+
+def someFunction():
+	try:
+		num = 45 / 0
+	except ZeroDivisionError:
+		print('You tried divinding a number by Zero')
+	finally:
+		print('From Finally of 1st try block')
+	print('After 1st set of try-except-finally blocks')
+	try:
+		list1 = []
+		# num = list1[1] # Exception occurs
+	except IndexError:
+		print('You tried to access an element beyond list size')
+	finally:
+		print('From Finally of 2nd try block')
+	print('After 2nd set of try-except-finally blocks')
+
+# Main block
+someFunction()
+-----------------------------------------
+def someFunction():
+	try:
+		print('From the 1st outer try block')
+		try:
+			print('from the nexted try block')
+		except Exception:
+			print('from the nexted except block')
+		finally:
+			print('from the nexted finally block')
+	except ZeroDivisionError:
+		print('You tried divinding a number by Zero')
+	finally:
+		print('From Finally of 1st try block')
+	print('After 1st set of try-except-finally blocks')
+	try:
+		list1 = []
+		# num = list1[1] # Exception occurs
+	except IndexError:
+		print('You tried to access an element beyond list size')
+	finally:
+		print('From Finally of 2nd try block')
+	print('After 2nd set of try-except-finally blocks')
+
+# Main block
+someFunction()
+-----------------------------------------------
+hello = input()
+print1(hello)
+#NameError: name 'print1' is not defined
+# Any name/identifier in the code, say a variable or def or class etc. which is not defined, but being accessed causes NameError
+
+num1 = input('Enter a number: ')
+num2 = int(input('Enter a number: '))
+
+sum = num1 + num2 # Note that there is no implicit cast in Python
+# TypeError: can only concatenate str (not "int") to str`
+print(sum)
+---------------
+nithin = print('Nithin') # print() returns nothing
+print(nithin) #None
+print(len(nithin))
+#TypeError: object of type 'NoneType' has no len()
+----------------------------------
+num1 = 17
+num2 = 0
+num3 = num1/num2 # Error
+print(num3)
+# ZeroDivisionError: division by zero
+----------------------------
+import math
+root = math.sqrt(-20)
+print(f'Root = {root}')
+# ValueError: math domain error
+
+import math
+try:
+	root = math.sqrt(-20)
+	print(f'Root = {root}')
+except ValueError:
+	print('You gave a wrong Type of value')
+# ValueError: math domain error
+------------------------------
+list1 = [1, 4, 8]
+for i in range(5):
+	print(list1[i])
+# IndexError: list index out of range
+-----------------------------
+AssertionError:
+Raised when the assert statement fails.
+AttributeError:
+Raised on the attribute assignment or reference fails.
+EOFError:
+Raised when the input() function hits the end-of-file condition.
+FloatingPointError:
+Raised when a floating point operation fails.
+GeneratorExit:
+Raised when a generator's close() method is called.
+ImportError:
+Raised when the imported module is not found.
+IndexError:
+Raised when the index of a sequence is out of range.
+KeyError:
+Raised when a key is not found in a dictionary.
+KeyboardInterrupt:
+Raised when the user hits the interrupt key (Ctrl+c or delete).
+MemoryError:
+Raised when an operation runs out of memory.
+NameError:
+Raised when a variable is not found in the local or global scope.
+NotImplementedError:
+Raised by abstract methods.
+OSError:
+Raised when a system operation causes a system-related error.
+OverflowError:
+Raised when the result of an arithmetic operation is too large to be represented.
+ReferenceError:
+Raised when a weak reference proxy is used to access a garbage collected referent.
+RuntimeError:
+Raised when an error does not fall under any other category.
+StopIteration:
+Raised by the next() function to indicate that there is no further item to be returned by the iterator.
+SyntaxError:
+Raised by the parser when a syntax error is encountered.
+IndentationError:
+Raised when there is an incorrect indentation.
+TabError:
+Raised when the indentation consists of inconsistent tabs and spaces.
+SystemError:
+Raised when the interpreter detects internal error.
+SystemExit:
+Raised by the sys.exit() function.
+TypeError:
+Raised when a function or operation is applied to an object of an incorrect type.
+UnboundLocalError:
+Raised when a reference is made to a local variable in a function or method, but no value has been bound to that variable.
+UnicodeError:
+Raised when a Unicode-related encoding or decoding error occurs.
+UnicodeEncodeError:
+Raised when a Unicode-related error occurs during encoding.
+UnicodeDecodeError:
+Raised when a Unicode-related error occurs during decoding.
+UnicodeTranslateError:
+Raised when a Unicode-related error occurs during translation.
+ValueError:
+Raised when a function gets an argument of correct type but improper value.
+ZeroDivisionError:
+Raised when the second operand of a division or module operation is zero.
+
+
+1.
+a = ["Python", "Exceptions", "try and except"]  
+try:  
+     for i in range(4):  
+        print( "The index and element from the array is", i, a[i] )  
+except:  
+    print ("Index out of range")  
+print ("Out of try catch block")
+--------------------------------------
+2.
+def check(list1, name):
+	try:
+		total = 0
+		for ele in list1:
+			toral += int(ele)
+		avg = total // len(list1)
+		pwd = avg + name
+		return int(pwd)
+	except ValueError:
+		print('Value error while check')
+	except TypeError:
+		print('Type error while check')
+	except NameError:
+		print('Name error while check')
+	print('From end of inside of method')
+
+list1 = [10, 20, 30, 40, 50, 60, '7A']
+try:
+	check(list1, 'ABC')
+except NameError:
+	print('Name error in Main')
+finally:
+	print('Finally in Main')
+-----------------------------------------
+3.
+class NonDivisibilityException(Exception):
+	pass
+
+class NonPositiveException(Exception):
+	pass
+
+class CheckStatus:
+	def is_div_by_two(self, list1):
+		try:
+			for value in list1:
+				if value % 2 != 0:
+					raise NonDivisibilityException()
+				if value < 0:
+					raise NonPositiveException()
+			print('Divisible by 2')
+		except NonDivisibilityException:
+			print('Number excetpion - Inside')
+		print('Inside Method')
+
+# Main Code:
+try:
+	CheckStatus().is_div_by_two([3, -8, 12, 4])
+	print('Inside Main')
+except NonDivisibilityException:
+	print('Number exception - Outside')
+except Exception as e:
+	print('Some Error occured')
+finally:
+	print('From Inside Finally of Main')
+print('Program Over')
+--------------------------------------
+4.
+class B(Exception):
+    pass
+
+class C(B):
+    pass
+
+class D(C):
+    pass
+
+for cls in [B, C, D]:
+    try:
+        raise cls()
+    except D:
+        print("D")
+    except C:
+        print("C")
+    except B:
+        print("B")
+-------------------------------------
+try:
+    raise Exception('spam', 'eggs')
+except Exception as inst:
+    print(type(inst))    # the exception instance
+    print(inst.args)     # arguments stored in .args
+    print(inst)          # __str__ allows args to be printed directly,
+                         # but may be overridden in exception subclasses
+    x, y = inst.args     # unpack args
+    print('x =', x)
+    print('y =', y)
+
+<class 'Exception'>
+('spam', 'eggs')
+('spam', 'eggs')
+x = spam
+y = eggs
+----------------------------------------
+import sys
+
+try:
+    f = open('myfile.txt')
+    s = f.readline()
+    i = int(s.strip())
+except OSError as err:
+    print("OS error:", err)
+except ValueError:
+    print("Could not convert data to an integer.")
+except Exception as err:
+    print(f"Unexpected {err=}, {type(err)=}")
+    raise
+---------------------------------------
+for arg in sys.argv[1:]:
+    try:
+        f = open(arg, 'r')
+    except OSError:
+        print('cannot open', arg)
+    else:
+        print(arg, 'has', len(f.readlines()), 'lines')
+        f.close()
+----------------------------------------------------------
+import os
+from os import walk
+from re import search
+from threading import Thread
+import sys
+import time
+
+
+class Search_for_file:
+    def __init__(self, filename):
+        # self.path = path
+        self.filename = filename
+
+    def find_disk(self):
+        userDrive = input("which drive you want to open ? C or D or E: ")
+        if "C" in userDrive.upper():
+            os.startfile("C:")
+        elif "D" in userDrive.upper():
+            os.startfile("D:")
+        else:
+            print("enter correct drive name")
+
+    def list_Files(self):
+        mypath = "D:\\Documents"
+        for (root, dirs, files) in os.walk(mypath, topdown=True):
+            print(root)
+            print(dirs)
+            print(files, '\n')
+
+    def find_File_ByPath(self):
+        paths = []
+        path = "D:\\Documents"
+        for root, dirs, files in os.walk(path):
+            if self.filename in files:
+                paths.append(os.path.join(root))
+        print(paths)
+
+    def getFilesFromFolder(self):
+        myPath = 'D:\\Documents'
+        listOfFiles = []
+        listOfFiles = os.listdir(myPath)
+        for eachFile in listOfFiles:
+            print(myPath + '\\' + str(eachFile))
+
+    def getFilesFromFolder2(folderName):
+        listOfFiles = []
+        listOfFiles = os.listdir(folderName)
+        for eachFile in listOfFiles:
+            print(folderName + '\\' + str(eachFile)) # Gloabl/Main Code:
+    path1= 'D:\\Documents'
+    Path2 = 'D:\\Desktop'
+    istofFiles1 = []
+    listofFiles2 = []
+    t1 = Thread(target=getFilesFromFolder2, args=(path1,))
+    t2 = Thread(target=getFilesFromFolder2, args=(Path2,))
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+
+    print('Time taken to get files from 2 folders is ', time.time(), 'seconds')
+
+
+def exitprogram():
+    sys.exit("system exiting")
+
+
+def printerror():
+    print("Invalid option entered")
+
+
+def Filehandling():
+    filename = input("Enter a filename to search: ")
+    se = Search_for_file(filename)
+    menu = {
+        1: se.find_disk,
+        2: se.list_Files,
+        3: se.find_File_ByPath,
+        4: se.getFilesFromFolder,
+        5:se.getFilesFromFolder2,
+        6: exitprogram,
+    }
+
+    while True:
+        print("\n", end='')
+        choice = int(input())
+        menu.get(choice, printerror)()
+
+
+Filehandling()
+print(time.time())
+------------------------------------------------------------------
+Wednesday 26-10-2022 Absentees
+Harika
+Thursday 27-10-2022 Absentees
+Harika
+Friday 27-10-2022 Absentees
+Harika
+
+Team1: Garoju Prathibha, Sainath, Neelaveni, Ramadevi
+Team2: Poorna, Bhanu Prakash, Aruna, Gayathri
+Team3: Bhavya, UmaMaheshwari, Srivallika, Jyosthna
+Team4: Rupasree, Sivateja, SuryaTeja, EswarKalyan
+Team5: MeghaShyam, Mounika, Priyanka, Katlamudi Lavanya
+Team6: Cheegati Prathiba, Sirisha, PavanaShree, Pratyusha
+Team7: Yasoda Pallavi, Hemalatha, Sowjanya, Padmavathi
+Team8: Preethi, VeeraBabu, Jaldula Lavanya, Prasanna
+
+CASE STUDY:
+1. To be implemented using Object Oriented
+2. Use Exception Handling
+3. Must be implemented using Multi-Threading
+4. Documentation with UML diagrams
+5. Proper UI must be used.
+---------------------------------------------------------------------
+Team1: P1 	FLIGHT BOOKING APP (flights, customers, bookings)
+52130621	Siddanatham Jyothi
+52140930	RASALA  SULOCHANA
+52130751	seerapu Sanjeev
+52138220	PALEM VASANTHALAKSHMI
+
+6/10
+8/10
+5/10
+4/10
+6/10
+
+Team2: P4 	Mobile Store Inventory
+52130788	Sanduru Jyoshna
+52130556	Sunkara Ramaswamy Naidu
+52130536	Mallela Himasree
+52140931	CHALLA  SREENIVASULU
+
+6/10
+7/10
+2/10
+6/10
+4/10
+
+Team3: P2	STUDENT COURSE ENROLLMENT (students, courses, student_course)
+52138728	SHAIK JAFAR VALI
+52138219	BULIPE GAYATHRI
+52138701	Karnam Pavan Kumar
+52138727	Srimathbhagavatham Ramya Sahithi
+
+6/10
+7/10
+4/10
+5/10
+6/10
+
+Team4: P3	GAMING CLUB (games, transactions)
+52138929	Thota Manohar
+52138720	Devarapalli Akhil
+52130560	Prudhvi Raj Botsa
+52138715	Dhanisetty Alekhya
+
+
+
+Team5: P1	
+52138704	C LIKHITH
+52138132	ABDUL YASMIN
+52138724	Rajulapati Bhagya Sree
+52134903	MODALA SUSHMA VYSHNAVI
+
+5/10
+5/10
+5/10
+4/10
+
+Team6: P2
+52130545	BANDIKANTI AVINASH
+52138223	NAMATHOTI MANJUSHA
+52138709	Gompa Praneetha
+52138703	Chengali Jyothirmai
+
+7/10
+6/10
+6/10
+7/10
+
+Team7: P3
+52138713	Kola Aravind
+52138726	Sadhu Maheswari
+52138716	Potnuru jeevana Bhargavi
+52138700	Nallamothu Sri Sindhu
+
+6/10
+7/10
+6/10
+5/10
+4/10
+
+Team8: P4
+52138710	Nabeela Zayeem
+52138717	Lakshmipuram Manish
+52138706	Chakrala Venkata Siva Naga Sirisha
+52138736	YEDLURI SIVA KUMAR
+
+5/10
+8/10
+5/10
+3/10
+
+Team9: P5	MOVIE TICKET BOOKING APP
+52138723	Kathevarpu Omphani Sai Ram
+52138707	Kokku Sailakshmi
+52138735	Jasmin Shaik
+52140933	RAJANALA  THIRUPATHIREDDY
+
+6/10
+6/10
+5/10
+3/10
+8/10
