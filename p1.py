@@ -1,74 +1,65 @@
 class Node:
     def __init__(self):
-        self.data = input('Enter data of the new Node: ')
-        self.link = None
+        self.leftLink = None
+        self.data = int(input('Enter data of the new Node: '))
+        self.rightLink = None
 
-class LinkedList:
+class BST:
     def __init__(self):
-        self.head = None
+        self.root = None
 
     def insertNode(self):
-        position = int(input('Enter position of the new node: '))
-        node = Node()
-        if self.head == None:
-            self.head = node
-            return
-        if position == 1:
-            node.link = self.head
-            self.head = node
-            return
-        temp = self.head
-        i = 2
-        while temp.link != None and i < position:
-            i += 1
-            temp = temp.link
-        if temp.link == None:
-            temp.link = node
-            return
-        node.link = temp.link
-        temp.link = node
-
-    def displayList(self):
-        if self.head == None:
-            print('List is empty')
-            return
-        temp = self.head
-        while temp != None:
-            if temp.link != None:
-                print(temp.data + ' -> ', end='')   
+        newNode = Node()
+        if self.root == None:
+            self.root = newNode
+            return        
+        temp1 = self.root
+        temp2 = None
+        while temp1 != None:
+            temp2 = temp1
+            if newNode.data < temp1.data:
+                temp1 = temp1.leftLink
             else:
-                print(temp.data)
-            temp = temp.link
+                temp1 = temp1.rightLink
+        if newNode.data < temp2.data:
+            temp2.leftLink = newNode
+        else:
+            temp2.rightLink = newNode
+
+    def insertNodeRecursively(self, temp):
+        if temp == None:
+            newNode = Node()
+            return newNode
+        if newNode.data < temp.data:
+            temp.leftLink = self.insertNodeRecursively(temp.leftLink)
+        else:
+            temp.rightLing = self.insertNodeRecursively(temp.rightLink)
+        return temp
+
+    def inOrder(self, temp):
+        if temp != None:
+            self.inOrder(temp.leftLink)
+            print(temp.data)
+            self.inOrder(temp.rightLink)
+
+    def preOrder(self, temp):
+        if temp != None:
+            print(temp.data)
+            self.preOrder(temp.leftLink)
+            self.preOrder(temp.rightLink)
+
+    def postOrder(self, temp):
+        if temp != None:
+            self.postOrder(temp.leftLink)
+            self.postOrder(temp.rightLink)
+            print(temp.data)
 
     def deleteNode(self):
-        if self.head == None:
-            print('List is empty')
-            return
-        position = int(input('Enter the position of the node to be deleted: '))
-        if position == 1:
-            print(f'Node with data {self.head.data} is deleted')
-            self.head = self.head.link
-            return
-        i = 1
-        temp2 = None
-        temp1 = self.head
-        while temp1.link != None and i < position:
-            i += 1
-            temp2 = temp1
-            temp1 = temp1.link
-        if temp1.link == None and position > i:
-            print('Invalid position enetered')
-            return
-        if i == position-1 and temp1.link == None:
-            print(f'Node with data {temp1.data} is deleted')
-            temp2.link = None
-            return
-        print(f'Node with data {temp1.data} is deleted')
-        temp2.link = temp1.link
+        pass
 
 class Menu:
-    def __init__(self, listObject):
-        self.listObject = listObject
+    def __init__(self, treeObject):
+        self.treeObject = treeObject
 
     def exitProgram(self):
         exit('End of Program')
@@ -76,24 +67,35 @@ class Menu:
     def invalidChoice(self):
         print('Invalid choice entered')
 
-    def getMenu(self):
+    def getDataManupalationMenu(self):
         menu = {
-            1 : self.listObject.insertNode,
-            2 : self.listObject.deleteNode,
-            3 : self.listObject.displayList,
-            4 : self.exitProgram
+            1 : self.treeObject.insertNode,
+            2 : self.treeObject.deleteNode,
+            6 : self.exitProgram
         }
         return menu
     
+    def getTreeTraversalMenu(self):
+        menu = {
+            3 : self.treeObject.inOrder,
+            4 : self.treeObject.preOrder,
+            5 : self.treeObject.postOrder
+        }
+        return menu
+
     def runMenu(self):
-        menu = self.getMenu()
+        menu1 = self.getDataManupalationMenu()
+        menu2 = self.getTreeTraversalMenu()
         while True:
-            choice = int(input('1:Insert 2:Delete 3:DisplayList 4:Exit Your choice Plz: '))
-            menu.get(choice, self.invalidChoice)()
+            choice = int(input('1:Insert 2:Delete 3:InOrder 4:PreOrder 5:PostOrder 6:Exit  Your choice Plz: '))
+            if choice >= 3 and choice <= 5:
+                menu2.get(choice, self.invalidChoice)(self.treeObject.root)
+            else:
+                menu1.get(choice, self.invalidChoice)()
 
 def startApp():
-    list = LinkedList()
-    menuObj = Menu(list)
+    treeObject = BST()
+    menuObj = Menu(treeObject)
     menuObj.runMenu()
 
 startApp()
