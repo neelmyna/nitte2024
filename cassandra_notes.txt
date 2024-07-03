@@ -1,0 +1,239 @@
+LETS TRAVEL CASSANDRA:
+
+Cassandra is used for high volume of data processing.
+
+LARGE DATA PROCESSING:
+Cassandra is used by Facebook for Content Management, Apple for server instances, Netflix (Audit Logging) and more
+Thus Cassandra is general purpose database.
+
+NODES IN CASSANDRA:
+Data is stored in forms of Partitions and partitions are stored in Nodes.
+Each instance of Cassandra is called as Node. A staggering 2 to 4 TB of data can be stored in each Node.
+Nodes can be distributed to scale up horizontally.
+Nodes are put together in a CLUSTER or RING (in the back end)
+
+DISTRIBUTED:
+Distributed means, the same piece of data is replicated in multiple Nodes which is then accessed by different machines/clients.
+
+CQL:
+Uses its own CQL (Cassandra Query Language). It is mostly Schema less, meaning data can be unstructured. Thus making it easy to learn and use.
+
+ALWAYS AVAILABLE:
+Data are usually replicated in multiple Nodes, so that data is always 100% up time, in other words it is ALWAYS AVAILABLE.
+This means that, if one Node goes down, the data is still accessible from other Nodes.
+
+PEER TO PEER ARCHITECTURE:
+Usually the RDBMS databases are built using Master-Slave Architecture. If the Master goes down, then the Users/Slave Nodes may not be accessible.
+However, Cassandra is built on Peer-Peer Architecture and hence all Nodes are accessible.
+
+DATA STORAGE IN CASSANDRA:
+Data is stored in Cassandra in PARTITIONS. A Partition is Atomic piece/Unit of data in Cassandra. A Partition is similar to a Row in SQL and Document in MongoDB, where related data are Encapsulated.
+Thus, a Node can have one or more Partitions.
+
+Smaller Partitions are better for Query Performance. In other words, it's like Normalized data in RDBMS with few fields/columns. Those fields that are least related must be seperated into different Partitions.
+
+When we create a table in Cassandra, we mention the Primary key. The 1st field in the primary key we mention is the PARTITION KEY. Thus, the data with a Partition key will be in the same Partition.
+
+create table restaurants(
+	name text,
+	type text,			(veg, non-veg)
+	cuisine text,		(italian, sounth-Indian, Chinese, Thai)
+	locality text,
+	rating int,
+	address text,
+	category text		(cheaper, budget, luxury)
+	primary key(cuisine, type, category, locality)
+)
+
+The Order of fields in primary key matters.
+We can have composite partition key as given below:
+
+create table restaurants(
+	name text,
+	type text,			(veg, non-veg)
+	cuisine text,		(italian, sounth-Indian, Chinese, Thai)
+	locality text,
+	rating int,
+	address text,
+	category text		(cheaper, budget, luxury)
+	primary key((cuisine, type, category), locality)
+)
+	
+USE CASES OF CASSANDRA:
+* High write throughput Apps
+* IoT Apps
+* Web Apps data (Social Media)
+* Health Data Apps
+* Weather Forcast
+
+The CAP theorem, also known as Brewer's theorem, is a computer science theory that states that a distributed system or data store can only guarantee two of three characteristics at once: consistency, availability, and partition tolerance (CAP):
+Consistency
+Duplicated data items appear the same on all nodes during different transactions.
+Availability
+All clients who request data receive a response, even if some nodes are down.
+Partition tolerance
+A partition is a communication breakdown between nodes, such as a lost connection or momentary delay.
+
+Schema for Cassandra needs to be designed with query Patterns in Mind.
+
+The data is wrapped into keyspace.
+Developers work with data using the keyspace.
+Keyspace may represent data in tabular form inside it.
+Keyspace represents one Application.
+Keyspace acts as replication container and it similar to a database in RDBMS/mongoDB.
+
+Cassandra can be used with many languages like Java, Python using the SDKs.
+
+One way to use Cassandra is AstraDB which is server less.
+First we create a keyspace to replicate the data.
+Then, we choose the language to work with.
+STARGATE is used to make the data avaiable via REST and graphql or GRPC
+
+CQL is a subset of SQL. In CQL, we dont have joins to minimize the complexity.
+
+To use CQLsh, we need Python (version 3.6+)
+
+DATA TYPES IN CASSANDRA:
+cql_type::=
+
+native_type
+ASCII | BIGINT | BLOB | BOOLEAN | COUNTER | DATE
+| DECIMAL | DOUBLE | DURATION | FLOAT | INET | INT |
+SMALLINT | TEXT | TIME | TIMESTAMP | TIMEUUID | TINYINT |
+UUID | VARCHAR | VARINT
+
+collection_type
+set
+list
+map
+
+user_defined_type
+CREATE TYPE phone (
+    country_code int,
+    number text,
+);
+
+CREATE TYPE address (
+    street text,
+    city text,
+    zip text,
+    phones map<text, phone>
+);
+
+CREATE TABLE user (
+    name text PRIMARY KEY,
+    addresses map<text, frozen<address>>
+);
+
+tuple_type
+Functionally, tuples can be though as anonymous UDT with anonymous fields.
+
+custom_type
+A custom type is a string that contains the name of Java class that extends the server side AbstractType class and that can be loaded by Cassandra
+----------------------------------------------------------
+Cassandra Installation:
+
+G search:
+apache cassandra
+goto: cassandra.apache.org
+Documentation -> cassandra -> installation -> pre-requisites
+
+Once Java-8 and Python (respective version) are installed, now G serach:
+download apache cassandra
+goto: cassandra.apache.org/downloads
+
+Now, select the "stable version"
+Community version: https://www.apache.org/dyn/closer.lua/cassandra/4.0.13/apache-cassandra-4.0.13-bin.tar.gz
+Download it and install.
+
+To check if the Cassandra is installed:
+$ cassandra -version
+To run the Cassandra server:
+$ cassandra -f
+To run the Cassandra shell:
+$ cqlsh
+------------------------------------------------------
+Working with Cassandra inside Docker:
+G search: docker for windows desktop
+
+Download and Install Docker
+SignUp to Docker (Create Docker Account)
+--------------------------------------------
+After successful signup/register, sign in into your docker account:
+$ docker login
+Authentication is done (Login succeeded)
+
+STEP 1: GET CASSANDRA IMAGE FROM DOCKER HUB (centralized Repo for Docker images)
+Download and install all the s/w (including cassandra) required to work with cassandra 
+$ docker pull cassandra:latest
+
+
+STEP2: Create container using downloaded Docker image
+Create an instance of the cassandra database. This will be seen as a container in the docker.
+$ docker run --name cassandra_bnmit cassandra:latest
+
+Now, go to docker App, click on containers (Left top corner), U must see a container by name "cassandra_bnmit". Click on the Play button and run it.
+And now, come back to the CMD
+STEP3: Run the CQLsh
+$ docker exec -it cassandra_bnmit cqlsh
+
+We now get the cqlsh prompt. And we can start running the commands.
+---------------------------
+docker engine stopped:
+From the taskbar stop the docker app
+Go to the config file of docker:
+c:\users\dell\appdata\roaming\docker\settings.json
+And set the "wslEngineEnabled" : true
+-----------------------------------------------------------------
+In Apache Cassandra, SimpleStrategy and NetworkTopologyStrategy are two replication strategies that differ in their intended use:
+SIMPLESTRATEGY
+This strategy is recommended for a single data center and one rack, and is suitable for development work. When using SimpleStrategy, replicas are placed in consecutive nodes around a ring.
+NETWORKTOPOLOGYSTRATEGY
+This strategy is recommended for most deployments, especially when the cluster might need to expand to multiple data centers in the future. With NetworkTopologyStrategy, you can specify a different replication factor for each data center, and store multiple copies of data across those data centers.
+
+Command to print the keyspaces
+cqlsh>desc keyspaces;
+
+Command to create a keyspace:
+create keyspace if not exists vendor with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : '1'};
+
+Command to describe a specific keyspace.
+cqlsh>desc keyspace vendor;
+
+Command to list the tables created in the keyspace
+cqlsh>desc tables;
+
+Command to switch to a particular keyspace
+cqlsh>use vendor;
+
+Command to create a new table:
+cqlsh:vendor> CREATE TABLE IF NOT EXISTS vendors(
+	id int primary key,
+	name text,
+	rating tinyint,
+	phone_num bigint,
+	location text
+);
+
+Or:
+
+cqlsh> CREATE TABLE IF NOT EXISTS vendor.vendors(
+	id int primary key,
+	name text,
+	rating tinyint,
+	phone_num bigint,
+	location text
+);
+
+-- create a tuple
+CREATE TABLE subjects (
+  k int PRIMARY KEY,
+  v tuple<int, text, float>
+);
+
+-- insert values
+INSERT INTO subjects  (k, v) VALUES(0, (3, 'cs', 2.1));
+
+-- retrieve values
+SELECT * FROM subjects;
+

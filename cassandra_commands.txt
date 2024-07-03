@@ -1,0 +1,115 @@
+1. To list the created keyspaces
+cqlsh> desc keyspaces;
+MongoDb equivalent: cqlsh> show databases;
+
+2. To create a new keyspace:
+cqlsh> create keyspace if not exists vendor with replication = = { 'class' : 'SimpleStrategy', 'replication_factor' : '2'};
+
+3. Now, we have to switch to the keyspace we wish to work with. To do so, use the below command:
+
+cqlsh> use vendor;
+Now, you may observe, the prompt has changed to:
+cqlsh:vendor>
+
+4. We can desc the keyspace we have created:
+cqlsh:vendor> desc keyspace vendor;
+
+5. Now that we have created a keyspace and we have switched into it, let us now create tables inside the keyspace:
+cqlsh:vendor> CREATE TABLE  IF NOT EXISTS courses (
+  id varchar PRIMARY KEY,
+  name varchar,
+  author varchar,
+  audience int,
+  duration int,
+  hasClosedCaptions boolean,
+  released timestamp
+);
+
+---------------------------------
+CREATE KEYSPACE pluralsight WITH REPLICATION = {'class':'SimpleStrategy','replication_factor':1};
+
+CREATE TABLE courses (id varchar PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS courses (id VARCHAR PRIMARY KEY);
+ALTER TABLE courses ADD duration int;
+ALTER TABLE courses ADD released timestamp;
+ALTER TABLE courses ADD author varchar;
+DROP TABLE courses;
+
+CREATE TABLE courses (
+  id varchar PRIMARY KEY,
+  name varchar,
+  author varchar,
+  audience int,
+  duration int,
+  hasClosedCaptions boolean,
+  released timestamp
+);
+
+SELECT id, title FROM pluralsight.courses;
+SELECT title, duration AS length FROM pluralsight.courses WHERE id = 'cassandra-developers';
+SELECT title, published FROM pluralsight.courses WHERE id IN ('cassandra-developers', 'node-intro');
+SELECT * FROM pluralsight.courses LIMIT 100;
+
+INSERT INTO pluralsight.courses (id, author) VALUES ('cassandra-developers', 'paul-ofallon');
+UPDATE pluralsight.courses SET author = 'paul-ofallon' WHERE id = 'cassandra-developers';
+UPDATE pluralsight.courses SET author = 'paul-ofallon' WHERE id IN ('cassandra-developers', 'node-intro');
+
+SELECT id, WRITETIME(author) FROM pluralsight.courses;
+
+-- Delete a row
+DELETE FROM pluralsight.courses WHERE id = 'node-intro';
+
+-- Delete a column
+DELETE author FROM pluralsight.courses WHERE id = 'node-intro';
+UPDATE pluralsight.courses SET author = null WHERE id = 'node-intro';
+INSERT INTO pluralsight.courses (id, author) VALUES ('node-intro', null);
+
+-- Use a TTL (length of time in seconds) for a single column
+UPDATE pluralsight.users USING TTL 32400 SET reset_token = 'asdf' WHERE id = 'john-doe';
+SELECT TTL(reset_token) FROM pluralsight.users WHERE id = 'john-doe';
+
+-- Use a TTL for an entire row
+-- Only insert statements can be used to set a TTL for an entire row. Can't be done with UPDATE.
+INSERT INTO pluralsight.reset_tokens (id, token) VALUES ('john-doe', 'asdoij') USING TTL 10800;
+
+-- Use a TTL for the entire table. The entire table will be tombstoned after the TTL expires.
+CREATE TABLE reset_tokens (
+  id varchar PRIMARY KEY,
+  token varchar
+) WITH default_time_to_live = 10800;
+
+-- If you have a table of id, partition_key, and you want to get one row for each id and the first partition_key, you can use this query:
+SELECT DISTINCT id, partition_key FROM table;
+
+-- Working with Collections
+-- set<type>
+INSERT INTO courses (id, name, features) VALUES ('node-intro', 'Introduction to Node.js', {'cc', 'transcript'});
+UPDATE courses SET features = features + {'cc'} WHERE id = 'node-intro'; -- the + symbol adds to the set.
+UPDATE courses SET features = features - {'cc'} WHERE id = 'node-intro'; -- the - symbol removes from the set.
+UPDATE courses SET features = {} WHERE id = 'node-intro'; -- create an empty set.
+
+-- list<type>
+INSERT INTO courses (id, clips) VALUES ('node-intro', ['Getting Started']);
+UPDATE courses SET clips = ['Introduction'] + clips WHERE id = 'node-intro'; -- prepend to the front of the list
+UPDATE courses SET clips = clips + ['Introduction'] WHERE id = 'node-intro'; -- append to the back of the list
+UPDATE courses SET clips = clips - ['Introduction'] WHERE id = 'node-intro'; -- removes all matching elements from the list.
+UPDATE courses SET clips[0] = 'Introduction' WHERE id = 'node-intro'; -- add to list by position. Use indexing as you would in an array.
+DELETE clips[0] FROM courses WHERE id = 'node-intro';
+
+-- map<key-type,value-type>
+INSERT INTO users (id, last_login) VALUES ('john-doe', {'abcde': '2015-06-30 09:02:24'});
+UPDATE users SET last_login['abcde'] = '2015-09-12 07:01:34' WHERE id = 'john-doe';
+UPDATE users SET last_login = last_login + {'abcde': '2015-06-30 09:02:24'} WHERE id = 'john-doe';
+UPDATE users SET last_login = last_login - {'abcde': '2015-06-30 09:02:24'} WHERE id = 'john-doe';
+DELETE last_login['abcde'] FROM users WHERE id = 'john-doe'
+UPDATE users set last_login = {} WHERE id = 'john-doe'
+
+-- secondary indexes
+CREATE TABLE users (id varchar, first_name varchar, tags set<varchar>, PRIMARY KEY (id));
+CREATE INDEX ON users(tags);
+INSERT INTO users (id, first_name, tags) VALUES ('john-doe','John', {'java'});
+SELECT * FROM users WHERE tags CONTAINS 'java';
+
+-- a secondary index for a map
+CREATE INDEX ON table(KEYS(map_column));
+SELECT * FROM table WHERE map_column CONTAINS KEY 'foo';
