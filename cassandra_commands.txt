@@ -26,7 +26,7 @@ cqlsh:vendor> CREATE TABLE  IF NOT EXISTS courses (
 );
 
 ---------------------------------
-CREATE KEYSPACE pluralsight WITH REPLICATION = {'class':'SimpleStrategy','replication_factor':1};
+CREATE KEYSPACE vendor WITH REPLICATION = {'class':'SimpleStrategy','replication_factor':1};
 
 CREATE TABLE courses (id varchar PRIMARY KEY);
 CREATE TABLE IF NOT EXISTS courses (id VARCHAR PRIMARY KEY);
@@ -45,32 +45,72 @@ CREATE TABLE courses (
   released timestamp
 );
 
-SELECT id, title FROM pluralsight.courses;
-SELECT title, duration AS length FROM pluralsight.courses WHERE id = 'cassandra-developers';
-SELECT title, published FROM pluralsight.courses WHERE id IN ('cassandra-developers', 'node-intro');
-SELECT * FROM pluralsight.courses LIMIT 100;
+cqlsh:vendor >insert into courses (id, name, author, audience, duration, hasClosedCaptions, released) values('101', 'java', 'nithin', 8, 80, false, '2024-07-01');
 
-INSERT INTO pluralsight.courses (id, author) VALUES ('cassandra-developers', 'paul-ofallon');
-UPDATE pluralsight.courses SET author = 'paul-ofallon' WHERE id = 'cassandra-developers';
-UPDATE pluralsight.courses SET author = 'paul-ofallon' WHERE id IN ('cassandra-developers', 'node-intro');
+cqlsh:vendor >insert into courses (id, name, author, audience, duration, hasClosedCaptions, released) values('102', 'python', 'mani', 10, 60, true, '2024-06-15');
 
-SELECT id, WRITETIME(author) FROM pluralsight.courses;
+To access all rows with specific columns from the table
+cqlsh:vendor> SELECT id, title FROM vendor.courses;
+cqlsh:vendor> SELECT id, title FROM courses;
+cqlsh> SELECT id, title FROM vendor.courses;
+Error in below code:
+cqlsh> SELECT id, title FROM courses;
+
+To access all rows with specific columns from the table
+cqlsh:vendor> SELECT id, title FROM vendor.courses;
+
+To access all columns from all rows:
+select * from courses;
+
+To Use Alias name for the existing column(s) and filter the rows using where clause:
+cqlsh:vendor> SELECT title, duration AS length FROM vendor.courses WHERE id = 'cassandra-developers';
+
+Select a specific row (using PK) and display its title with given value in the command.
+cqlsh:vendor> SELECT title, published FROM vendor.courses WHERE id IN ('102', 'nodeJS-introduction');
+
+Select only top 100 rows from the table
+cqlsh:vendor> SELECT * FROM vendor.courses LIMIT 100;
+
+Insert a new row with only few column values:
+cqlsh:vendor> INSERT INTO vendor.courses (id, author) VALUES ('cassandra-developers', 'nitish');
+
+Update a specific row (filter with PK) and set its author name with new name.
+cqlsh:vendor> UPDATE vendor.courses SET author = 'manish' WHERE id = '104';
+
+
+To match a value in a given list of values, we use the in()
+cqlsh:vendor> UPDATE vendor.courses SET author = 'girish' WHERE id IN ('101', '102');
+
+To print the given column's timestamp
+cqlsh:vendor> SELECT id, WRITETIME(author) FROM vendor.courses;
 
 -- Delete a row
-DELETE FROM pluralsight.courses WHERE id = 'node-intro';
+DELETE FROM vendor.courses WHERE id = '104';
 
--- Delete a column
-DELETE author FROM pluralsight.courses WHERE id = 'node-intro';
-UPDATE pluralsight.courses SET author = null WHERE id = 'node-intro';
-INSERT INTO pluralsight.courses (id, author) VALUES ('node-intro', null);
+-- Delete the row whose value of the given column id, matches with the given variable named null
+DELETE FROM vendor.courses WHERE id = null;
+
+-- Delete the row whose id is null (empty)
+DELETE FROM vendor.courses WHERE id is null;
+
+-- Delete the row whose id value is equal to the text (constant string) 'null'
+DELETE FROM vendor.courses WHERE id = 'null';
+
+-- Delete the value from a specific column:
+DELETE author FROM vendor.courses WHERE id = '109';
+
+-- Update author of a specific row with given id to null (make it empty) 
+UPDATE vendor.courses SET author = null WHERE id = '112';
+INSERT INTO vendor.courses (id, author) VALUES ('node-intro', null);
+
 
 -- Use a TTL (length of time in seconds) for a single column
-UPDATE pluralsight.users USING TTL 32400 SET reset_token = 'asdf' WHERE id = 'john-doe';
-SELECT TTL(reset_token) FROM pluralsight.users WHERE id = 'john-doe';
+UPDATE vendor.users USING TTL 32400 SET reset_token = 'asdf' WHERE id = 'john-doe';
+SELECT TTL(reset_token) FROM vendor.users WHERE id = 'john-doe';
 
 -- Use a TTL for an entire row
 -- Only insert statements can be used to set a TTL for an entire row. Can't be done with UPDATE.
-INSERT INTO pluralsight.reset_tokens (id, token) VALUES ('john-doe', 'asdoij') USING TTL 10800;
+INSERT INTO vendor.reset_tokens (id, token) VALUES ('john-doe', 'asdoij') USING TTL 10800;
 
 -- Use a TTL for the entire table. The entire table will be tombstoned after the TTL expires.
 CREATE TABLE reset_tokens (
