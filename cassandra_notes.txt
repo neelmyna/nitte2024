@@ -1,5 +1,8 @@
 LETS TRAVEL CASSANDRA:
 
+https://github.com/vrachieru/cheatsheet/blob/master/database/cassandra.cheatsheet
+
+
 Cassandra is used for high volume of data processing.
 
 LARGE DATA PROCESSING:
